@@ -1,0 +1,39 @@
+✅ Paso 1: Crear una Nueva Página Restringida
+
+Supongamos que queremos agregar una página llamada "Panel de Control" (panel.php), solo accesible para usuarios autenticados.
+
+📌 Crea un nuevo archivo panel.php con este contenido:
+
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="menu">
+        <ul class="menu-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="intranet.php">Intranet</a></li>
+            <li><a href="panel.php">Panel de Control</a></li>
+            <li><a href="logout.php">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Bienvenido al Panel de Control</h2>
+        <p>Esta es otra página restringida que solo pueden ver los usuarios autenticados.</p>
+    </div>
+</body>
+</html>
+
+🔹 Este código verifica si hay sesión iniciada, si no, redirige a login.html.
