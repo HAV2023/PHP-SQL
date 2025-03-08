@@ -1,6 +1,4 @@
 <?php
-session_start();
-<?php
 // Iniciar la sesión para acceder a las variables de sesión
 session_start();
 
