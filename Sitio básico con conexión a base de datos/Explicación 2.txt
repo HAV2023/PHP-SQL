@@ -2,7 +2,7 @@
 
 Para hacer que "Intranet" y "Panel de Control" aparezcan solo cuando el usuario haya iniciado sesión, modifiquemos el archivo script.js:
 
-🔹 Modifica script.js así:
+🔹 Modifiquen el archivo script.js así:
 
 document.addEventListener('DOMContentLoaded', function () {
     const restrictedMenu = document.getElementById('restricted-menu');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-📌 Y modifica index.html (o cualquier otra página con menú) así:
+📌 Y modifiquen el archivo index.html (o cualquier otra página con menú) así:
 
 <li id="restricted-menu" style="display: none;"><a href="../intranet/intranet.php">Intranet</a></li>
 <li id="panel-menu" style="display: none;"><a href="../intranet/panel.php">Panel de Control</a></li>
