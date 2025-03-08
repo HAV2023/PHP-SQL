@@ -2,7 +2,7 @@
 
 Supongamos que queremos agregar una página llamada "Panel de Control" (panel.php), solo accesible para usuarios autenticados.
 
-📌 Crea un nuevo archivo panel.php con este contenido:
+📌 Crear un nuevo archivo panel.php con este contenido:
 
 <?php
 session_start();
