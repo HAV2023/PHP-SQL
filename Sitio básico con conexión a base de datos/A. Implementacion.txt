@@ -9,6 +9,28 @@ Durante la instalación, se recomienda configurar el servidor en el **puerto 330
 como el paquete **XAMPP**, que por defecto utiliza el puerto 3306.  
 
 Asimismo, se proporciona un **script SQL** (db.sql) que facilita la instalación de la base de datos **"mi_base_datos"**, seguido de la creación de 
-la tabla **"users"**, permitiendo así la correcta implementación y ejecución de los ejercicios planteados.  
+la tabla **"users"**, permitiendo así la correcta implementación y ejecución de los ejercicios planteados.
+
+No olviden que para ejecutar archivos .php deben tener instalado en su computadora algún paquete de servidores de desarrollo local, o
+"stacks de servidores web" como XAMPP, MAMP, WAMP, Laragon, EasyPHP, AMPPS, etc. 
+
+Algunas recomendaciones:
+
+🔹 Para Windows
+
+✅ Laragon – Ligero, rápido y portátil. Ideal para proyectos en PHP y Node.js. Soporta múltiples versiones de PHP.
+✅ WAMP – Si solo trabajas en Windows y prefieres un entorno clásico.
+✅ XAMPP – Si necesitan compatibilidad con múltiples plataformas y facilidad de uso.
+
+🍏 Para macOS
+
+✅ MAMP – Fácil de instalar y configurar en Mac. Soporta PHP y MySQL.
+✅ Docker + Devilbox – Si buscan flexibilidad y escalabilidad en tus entornos.
+
+🐧 Para Linux
+
+✅ LAMP (Apache, MySQL/MariaDB, PHP) – Instalación nativa y optimizada para Linux.
+✅ LAPP (con PostgreSQL en lugar de MySQL) – Si prefieren PostgreSQL en lugar de MySQL.
+✅ Docker + Bitnami Stacks – Para mayor flexibilidad y compatibilidad con distintos entornos.
 
 ---  
