@@ -33,4 +33,11 @@ Algunas recomendaciones:
 ✅ LAPP (con PostgreSQL en lugar de MySQL) – Si prefieren PostgreSQL en lugar de MySQL.
 ✅ Docker + Bitnami Stacks – Para mayor flexibilidad y compatibilidad con distintos entornos.
 
+También proporciono un archivo para verificar la exitosa conexión a la base de datos, llamado test_db.php
+Ejecútenlo de la siguiente forma: http://localhost/intranet/test_db.php, para mi caso, el resultado es:
+
+✅ Conexión exitosa. Usuarios en la base de datos: 2 (Por la razón de que tengo 2 usuarios en mi tabla Users)
+
+Saludos.
+
 ---  
