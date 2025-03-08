@@ -8,7 +8,7 @@ Los ejercicios presentados están diseñados para trabajar con **MySQL Workbench
 Durante la instalación, se recomienda configurar el servidor en el **puerto 3307** para evitar conflictos con otros entornos de desarrollo, 
 como el paquete **XAMPP**, que por defecto utiliza el puerto 3306.  
 
-Asimismo, se proporciona un **script SQL** que facilita la instalación de la base de datos **"mi_base_datos"**, seguido de la creación de 
+Asimismo, se proporciona un **script SQL** (db.sql) que facilita la instalación de la base de datos **"mi_base_datos"**, seguido de la creación de 
 la tabla **"users"**, permitiendo así la correcta implementación y ejecución de los ejercicios planteados.  
 
 ---  
