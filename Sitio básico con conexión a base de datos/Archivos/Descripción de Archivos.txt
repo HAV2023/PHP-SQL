@@ -1,1 +1,70 @@
+ 📁 Archivos de Configuración
+ 1️⃣ `config.php`
+   - Se encarga de almacenar la configuración del sistema, como la conexión a la base de datos.
+   - Puede incluir credenciales para conectar con MySQL (host, usuario, contraseña y nombre de la base de datos).
+   - También puede manejar configuraciones generales como sesiones y seguridad.
 
+---
+
+📁 Archivos de Interfaz (Frontend)
+2️⃣ `index.html`
+   - Página de inicio del sistema.
+   - El menú principal contiene dos comandos 'Registro' e 'Inicio de Sesión'.
+
+3️⃣ `login.html`
+   - Página de inicio de sesión donde los usuarios ingresan su nombre de usuario y contraseña.
+   - Envia los datos a `login.php` para su validación.
+
+4️⃣ `register.html`
+   - Página de registro donde los nuevos usuarios ingresan sus datos (nombre, email, contraseña, etc.).
+   - Los datos se envían a `register.php` para guardarlos en la base de datos.
+
+5️⃣ `success_register.html`
+   - Página de confirmación que indica que el usuario ha sido registrado correctamente.
+   - Puede contener un enlace para ir a `login.html`.
+
+---
+
+📁 Archivos de Lógica (Backend)
+6️⃣ `login.php`
+   - Procesa el inicio de sesión verificando las credenciales ingresadas en `login.html`.
+   - Consulta la base de datos en `config.php` para validar usuario y contraseña.
+   - Inicia una sesión y redirige a `intranet.php` si el login es exitoso.
+   - Si el login falla, puede redirigir a `login.html` mostrando un mensaje de error.
+
+7️⃣ `register.php`
+   - Recibe los datos del formulario de `register.html`.
+   - Valida que los datos sean correctos (email válido, contraseñas coincidan, usuario no registrado).
+   - Guarda la información en la base de datos utilizando `config.php`.
+   - Redirige a `success_register.html` si el registro es exitoso.
+
+8️⃣ `logout.php`
+   - Cierra la sesión del usuario.
+   - Destruye la sesión activa y redirige a `index.html`.
+
+---
+
+📁 Área Restringida
+9️⃣ `intranet.php`
+   - Página interna accesible solo para usuarios registrados.
+   - Antes de cargar, verifica si hay una sesión iniciada (usando `session_start()` y variables de sesión).
+   - Si el usuario no ha iniciado sesión, lo redirige a `login.html`.
+   - Contiene contenido exclusivo para usuarios autenticados.
+
+---
+
+📁 Archivos Auxiliares
+🔟 `script.js`
+   - Archivo JavaScript que puede incluir validaciones de formularios antes de enviarlos (ejemplo: verificar si el email es válido o si las contraseñas coinciden).
+   - Se puede mejorar la experiencia de usuario agregando animaciones o alertas.
+
+1️⃣1️⃣ `styles.css`
+   - Archivo de estilos CSS para el diseño de las páginas HTML.
+   - Puede incluir estilos para los formularios, botones, alertas, entre otros.
+
+---
+
+🔍 Resumen
+- Frontend (Interfaz): `index.html`, `login.html`, `register.html`, `success_register.html`, `styles.css`, `script.js`.
+- Backend (Lógica): `config.php`, `login.php`, `register.php`, `logout.php`.
+- Área Protegida: `intranet.php`.
