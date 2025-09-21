@@ -1,6 +1,7 @@
 <?php
 /* ========================================================================
-   corredor.php — Versión docente HIPER‑documentada (línea por línea)
+   corredor.php — HIPER‑documentada (línea por línea)
+   AUTOR: Héctor Arciniega.
    ------------------------------------------------------------------------
    OBJETIVO: Simular una carrera de 100 m con cámara fija en el corredor.
    TECNOLOGÍAS: HTML + CSS + JS nativo (sin librerías). 
