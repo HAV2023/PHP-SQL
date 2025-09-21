@@ -1,6 +1,6 @@
 <?php
 /* ========================================================================
-   corredor_100m.php — Versión docente HIPER‑documentada (línea por línea)
+   corredor.php — Versión docente HIPER‑documentada (línea por línea)
    ------------------------------------------------------------------------
    OBJETIVO: Simular una carrera de 100 m con cámara fija en el corredor.
    TECNOLOGÍAS: HTML + CSS + JS nativo (sin librerías). 
