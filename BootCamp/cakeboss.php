@@ -1,6 +1,7 @@
 <?php
 // ======================================================================================
-// constructor_pasteles_basico.php
+// cakeboss.php
+// Autor: Héctor Arciniega Valencia
 // ======================================================================================
 // PROPÓSITO DEL PROGRAMA
 // ----------------------
@@ -307,3 +308,4 @@ if ($es_peticion_post) {
 </div>
 </body>
 </html>
+
