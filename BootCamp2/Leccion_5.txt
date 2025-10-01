@@ -130,7 +130,7 @@ Redirige al formulario de inicio de sesión y corta la ejecución.
 
 ⸻
 
-Pruebas rápidas
+🎯 Pruebas rápidas
 	1.	Entrar con usuario válido en iniciar_sesion.php.
 	2.	Abrir privado.php directamente: debe cargar sin redirigir.
 	3.	Abrir salir.php: debe destruir la sesión y llevar a iniciar_sesion.php.
