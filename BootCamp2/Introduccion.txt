@@ -1,1 +1,125 @@
+Introducción
 
+Objetivo
+
+Construir un sitio web con:
+	•	Registro de usuarios.
+	•	Inicio de sesión.
+	•	Páginas restringidas por sesión.
+	•	CRUD completo sobre la tabla usuarios.
+
+Herramientas
+	•	Stack local: macOS (MAMP o XAMPP), Windows (XAMPP/Laragon/WAMP), Linux (LAMP o Docker).
+	•	phpMyAdmin.
+	•	Editor (VS Code).
+	•	Navegador.
+
+Estructura final del proyecto
+
+proyecto_crud/
+├─ db.sql
+├─ conexion.php
+├─ registrar.php
+├─ iniciar_sesion.php
+├─ privado.php
+├─ salir.php
+├─ editar.php
+├─ eliminar.php
+└─ estilo.css
+
+Reglas del curso
+	•	Código limpio sin comentarios largos.
+	•	Explicación detallada en secciones independientes.
+	•	Seguridad básica: password_hash, sentencias preparadas, sesiones.
+
+⸻
+
+Lección 1 — Entorno y Base de Datos
+
+1. Preparar entorno
+
+macOS:
+	•	MAMP: instalar. Iniciar Apache y MySQL. phpMyAdmin en http://localhost/phpMyAdmin o http://localhost:8888/phpMyAdmin según puertos.
+	•	XAMPP: instalar. Iniciar Apache y MySQL. phpMyAdmin en http://localhost/phpmyadmin.
+
+Windows:
+	•	XAMPP/Laragon/WAMP. Iniciar Apache y MySQL. phpMyAdmin en http://localhost/phpmyadmin.
+
+Linux:
+	•	LAMP o Docker. phpMyAdmin accesible según configuración del servicio.
+
+Crear carpeta del proyecto:
+	•	XAMPP: htdocs/proyecto_crud/
+	•	MAMP: /Applications/MAMP/htdocs/proyecto_crud/
+
+2. Crear la base de datos
+
+Archivo: db.sql (guárdalo en la carpeta del proyecto).
+
+Parte A — Código limpio (SQL)
+
+CREATE DATABASE IF NOT EXISTS mi_base_datos
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE mi_base_datos;
+
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios (
+  id               INT AUTO_INCREMENT PRIMARY KEY,
+  nombre           VARCHAR(100)      NOT NULL,
+  correo           VARCHAR(120)      NOT NULL UNIQUE,
+  contrasena_hash  VARCHAR(255)      NOT NULL,
+  creado_en        TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+Parte B — Explicación línea por línea
+	•	CREATE DATABASE IF NOT EXISTS mi_base_datos
+Orden para crear una base de datos llamada mi_base_datos solo si no existe previamente.
+	•	CHARACTER SET utf8mb4
+Define el conjunto de caracteres de la base de datos como utf8mb4 para admitir acentos, eñes y emojis.
+	•	COLLATE utf8mb4_unicode_ci
+Define la forma de comparar y ordenar texto (collation) de forma insensible a mayúsculas/minúsculas en Unicode.
+	•	USE mi_base_datos;
+Indica que a partir de aquí todas las operaciones SQL se realizan dentro de mi_base_datos.
+	•	DROP TABLE IF EXISTS usuarios;
+Elimina la tabla usuarios si existía. Evita errores al recrearla durante prácticas.
+	•	CREATE TABLE usuarios (...);
+Crea la tabla usuarios con las columnas definidas dentro de los paréntesis.
+	•	id INT AUTO_INCREMENT PRIMARY KEY
+Columna id de tipo entero. AUTO_INCREMENT asigna un número creciente automático. PRIMARY KEY la establece como clave primaria.
+	•	nombre VARCHAR(100) NOT NULL
+Columna de texto de hasta 100 caracteres. NOT NULL impide valores vacíos.
+	•	correo VARCHAR(120) NOT NULL UNIQUE
+Columna de texto hasta 120 caracteres. NOT NULL y UNIQUE para no permitir correos repetidos.
+	•	contrasena_hash VARCHAR(255) NOT NULL
+Columna para guardar el hash de la contraseña. 255 admite hashes modernos.
+	•	creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+Guarda fecha y hora de creación. Valor por defecto: momento de inserción.
+	•	ENGINE=InnoDB
+Motor de almacenamiento que soporta transacciones y claves foráneas.
+	•	DEFAULT CHARSET=utf8mb4 / COLLATE=utf8mb4_unicode_ci
+Asegura que la tabla use el mismo conjunto de caracteres y collation definidos.
+
+3. Importar el script en phpMyAdmin
+	•	Abrir phpMyAdmin.
+	•	Seleccionar Importar.
+	•	Elegir archivo db.sql.
+	•	Ejecutar.
+	•	Verificar que aparecen la base mi_base_datos y la tabla usuarios.
+
+4. Verificación rápida
+
+En phpMyAdmin → pestaña SQL:
+
+USE mi_base_datos;
+SHOW TABLES;
+DESCRIBE usuarios;
+SELECT * FROM usuarios LIMIT 5;
+
+	•	SHOW TABLES; lista tablas.
+	•	DESCRIBE usuarios; muestra estructura de columnas.
+	•	SELECT * ... confirma consultas sin errores.
