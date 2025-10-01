@@ -1,4 +1,4 @@
-Versión completa de iniciar_sesion.php con el mismo estilo y consistencia visual que registrar.php.
+⚡Versión completa de iniciar_sesion.php con el mismo estilo y consistencia visual que registrar.php.
 
 ⸻
 
