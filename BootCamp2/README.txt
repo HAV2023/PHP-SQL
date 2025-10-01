@@ -6,7 +6,7 @@ Autor: Héctor Arciniega Valencia.
 Guiar paso a paso desde cero para construir un sitio web con:
 	•	Registro e inicio de sesión de usuarios.
 	•	Acceso privado restringido.
-	•	CRUD completo (Crear, Leer, Actualizar, Eliminar).
+	•	CRUD completo (Create, Read, Update, Delete).
 	•	Estética uniforme y profesional.
 
 ⸻
