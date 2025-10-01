@@ -1,1 +1,137 @@
+Lección 5 — Página privada y cierre de sesión
 
+Parte A — Código limpio (privado.php)
+
+<?php
+require_once "conexion.php";
+
+if (!isset($_SESSION["usuario_id"])) {
+    header("Location: iniciar_sesion.php");
+    exit;
+}
+
+$nombre_usuario = $_SESSION["usuario_nombre"];
+$correo_usuario = $_SESSION["usuario_correo"];
+
+$consulta = $conexion->query(
+    "SELECT id, nombre, correo, creado_en
+     FROM usuarios
+     ORDER BY id DESC"
+);
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Zona privada</title>
+  <link rel="stylesheet" href="estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Zona privada</h1>
+
+  <p>Bienvenido, <strong><?= htmlspecialchars($nombre_usuario) ?></strong>
+     (<?= htmlspecialchars($correo_usuario) ?>)</p>
+
+  <nav>
+    <a href="registrar.php">Crear usuario</a> |
+    <a href="privado.php">Inicio</a> |
+    <a href="salir.php">Cerrar sesión</a>
+  </nav>
+
+  <hr>
+
+  <h2>Usuarios registrados</h2>
+
+  <?php if ($consulta && $consulta->num_rows > 0): ?>
+    <table border="1" cellpadding="6">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Creado</th>
+        <th>Acciones</th>
+      </tr>
+      <?php while ($fila = $consulta->fetch_assoc()): ?>
+        <tr>
+          <td><?= (int)$fila["id"] ?></td>
+          <td><?= htmlspecialchars($fila["nombre"]) ?></td>
+          <td><?= htmlspecialchars($fila["correo"]) ?></td>
+          <td><?= htmlspecialchars($fila["creado_en"]) ?></td>
+          <td>
+            <a href="editar.php?id=<?= (int)$fila['id'] ?>">Editar</a> |
+            <a href="eliminar.php?id=<?= (int)$fila['id'] ?>"
+               onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a>
+          </td>
+        </tr>
+      <?php endwhile; ?>
+    </table>
+  <?php else: ?>
+    <p>No hay usuarios registrados.</p>
+  <?php endif; ?>
+</body>
+</html>
+
+Parte B — Explicación línea por línea (privado.php)
+	•	require_once "conexion.php";
+Incluye conexión y sesión iniciada para poder leer $_SESSION.
+	•	if (!isset($_SESSION["usuario_id"])) { ... }
+Verifica existencia de la variable de sesión que identifica al usuario autenticado. El operador ! niega la condición; si no existe, no hay sesión válida.
+	•	header("Location: iniciar_sesion.php"); exit;
+Envía cabecera HTTP de redirección al formulario de login y detiene el script.
+	•	$nombre_usuario = $_SESSION["usuario_nombre"];
+Copia a variable local el nombre guardado en sesión.
+	•	$correo_usuario = $_SESSION["usuario_correo"];
+Copia a variable local el correo guardado en sesión.
+	•	$consulta = $conexion->query("SELECT ...");
+Ejecuta consulta SQL que obtiene todas las filas ordenadas por id descendente.
+	•	<!DOCTYPE html>, <html lang="es">, <meta charset="UTF-8">
+Declaran documento HTML5, idioma español y codificación UTF-8.
+	•	<link rel="stylesheet" href="estilo.css">
+Carga estilos externos.
+	•	<?= htmlspecialchars($nombre_usuario) ?>
+Inserta valor escapado para evitar inyección de HTML en la salida. htmlspecialchars convierte caracteres especiales.
+	•	<nav> ... </nav>
+Barra de navegación interna con enlaces de trabajo frecuente.
+	•	<?php if ($consulta && $consulta->num_rows > 0): ?>
+Condición que evalúa si la consulta fue exitosa y trajo al menos una fila.
+	•	while ($fila = $consulta->fetch_assoc())
+Bucle que extrae cada fila como arreglo asociativo con claves iguales a las columnas.
+	•	<?= (int)$fila["id"] ?>
+Conversión explícita a entero para imprimir el identificador.
+	•	onclick="return confirm('¿Seguro de eliminar?');"
+Diálogo de confirmación del navegador; si el usuario cancela retorna false y el enlace no navega.
+
+⸻
+
+Parte A — Código limpio (salir.php)
+
+<?php
+session_start();
+
+$_SESSION = [];
+session_unset();
+session_destroy();
+
+header("Location: iniciar_sesion.php");
+exit;
+
+Parte B — Explicación línea por línea (salir.php)
+	•	session_start();
+Asegura que la sesión esté disponible para poder destruirla.
+	•	$_SESSION = [];
+Vacía el arreglo de variables de sesión en memoria.
+	•	session_unset();
+Limpia variables de sesión registradas.
+	•	session_destroy();
+Destruye el contenedor de la sesión en el servidor.
+	•	header("Location: iniciar_sesion.php"); exit;
+Redirige al formulario de inicio de sesión y corta la ejecución.
+
+⸻
+
+Pruebas rápidas
+	1.	Entrar con usuario válido en iniciar_sesion.php.
+	2.	Abrir privado.php directamente: debe cargar sin redirigir.
+	3.	Abrir salir.php: debe destruir la sesión y llevar a iniciar_sesion.php.
+	4.	Intentar privado.php tras salir: debe redirigir a iniciar_sesion.php.
