@@ -1,0 +1,127 @@
+/* Selector universal: afecta a todos los elementos */
+* {
+  box-sizing: border-box; /* El ancho/alto incluye padding y border */
+}
+
+/* Estilo general del cuerpo de la página */
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, sans-serif; /* Tipografías del sistema */
+  margin: 24px;             /* Márgenes alrededor del body */
+  line-height: 1.35;        /* Altura de línea para mejor legibilidad */
+}
+
+/* Encabezados */
+h1, h2 {
+  margin: 0 0 10px 0;       /* Sin margen arriba/lados, 10px abajo */
+}
+
+/* Bloques fieldset */
+fieldset {
+  border: 1px solid #ccc;   /* Borde gris claro */
+  padding: 12px;            /* Espacio interno */
+  border-radius: 8px;       /* Esquinas redondeadas */
+  margin-bottom: 16px;      /* Separación inferior */
+}
+
+/* Etiquetas de formularios */
+label {
+  display: block;           /* Ocupan todo el ancho */
+  margin: 6px 0 4px;        /* Márgenes arriba/abajo */
+  font-weight: 600;         /* Seminegrita */
+}
+
+/* Inputs de texto y numéricos */
+input[type=text], input[type=number] {
+  width: 100%;              /* Ocupan todo el ancho */
+  padding: 8px;             /* Espacio interno */
+  border: 1px solid #bbb;   /* Borde gris medio */
+  border-radius: 6px;       /* Esquinas suaves */
+}
+
+/* Botones generales */
+button {
+  padding: 8px 14px;        /* Tamaño interno */
+  border: 0;                /* Sin borde */
+  border-radius: 8px;       /* Esquinas redondeadas */
+  cursor: pointer;          /* Cursor de mano */
+}
+
+/* Botón principal */
+button.primario {
+  background: #0a7;         /* Verde azulado */
+  color: white;             /* Texto blanco */
+}
+
+/* Botón secundario */
+button.secundario {
+  background: #07a;         /* Azul */
+  color: white;             /* Texto blanco */
+}
+
+/* Tablas */
+table {
+  border-collapse: collapse;/* Fusiona bordes */
+  width: 100%;              /* Ancho completo */
+  margin-top: 12px;         /* Separación superior */
+}
+
+/* Encabezados y celdas */
+th, td {
+  border: 1px solid #ddd;   /* Bordes grises claros */
+  padding: 8px;             /* Espacio interno */
+  text-align: left;         /* Texto alineado a la izquierda */
+}
+
+/* Encabezados de tabla */
+th {
+  background: #f4f4f4;      /* Fondo gris claro */
+}
+
+/* Filas pares */
+tr:nth-child(even) {
+  background: #fafafa;      /* Fondo alterno */
+}
+
+/* Caja de notas */
+.nota {
+  font-size: 0.92rem;       /* Tamaño de texto menor */
+  color: #333;              /* Texto gris oscuro */
+  background: #f9f9ff;      /* Fondo azulado claro */
+  border: 1px dashed #99f;  /* Borde punteado azul */
+  padding: 8px;             /* Espacio interno */
+  border-radius: 6px;       /* Esquinas redondeadas */
+  margin: 8px 0;            /* Separación vertical */
+}
+
+/* Mensajes de error */
+.error {
+  color: #b00020;           /* Rojo intenso */
+  font-weight: 700;         /* Negrita */
+}
+
+/* Mensajes de éxito */
+.exito {
+  color: #0a7;              /* Verde azulado */
+  font-weight: 700;         /* Negrita */
+}
+
+/* Texto monoespaciado */
+small.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; /* Fuente mono */
+  color: #555;              /* Gris medio */
+}
+
+/* Bloque resumen */
+.resumen {
+  margin-top: 8px;          /* Separación arriba */
+  padding: 8px;             /* Espacio interno */
+  border-left: 4px solid #07a; /* Barra lateral azul */
+  background: #eef7ff;      /* Fondo azul muy claro */
+}
+
+/* Línea horizontal */
+hr {
+  border: 0;                /* Sin borde por defecto */
+  border-top: 1px solid #e5e5e5; /* Línea gris clara */
+  margin: 16px 0;           /* Separación vertical */
+}
