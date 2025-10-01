@@ -162,7 +162,7 @@ Envía datos al servidor.
 	•	<a href="registrar.php">Regístrate</a>
 Enlace para ir al registro si no tiene cuenta.
 
-Comprobación rápida
+🎯 Comprobación rápida
 	1.	Crea un usuario desde registrar.php.
 	2.	Abre http://localhost/proyecto_crud/iniciar_sesion.php.
 	3.	Prueba con correo y contraseña correctos: debe llevarte a privado.php.
