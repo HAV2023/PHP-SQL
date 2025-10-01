@@ -1,4 +1,4 @@
-Lección 3 — Registro de usuarios (formulario + alta segura)
+📘 Lección 3 — Registro de usuarios (formulario + alta segura)
 
 Parte A — Código limpio (registrar.php)
 
