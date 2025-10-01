@@ -121,6 +121,6 @@ Al final del Boot Camp, cada alumno podrá:
 	•	Exportar datos a CSV desde phpMyAdmin.
 
  ⚠️ IMPORTANTE: Las lecciones deberán ser implementadas en sus proyectos, tanto para los que participan en prototipos como los que están en EasyProjects. 
- ⚠️ Este requisito es indispensable para ser sumado al valor del examen del 2do. periodo.
+ 📌 Este requisito es indispensable para ser sumado al valor del examen del 2do. periodo.
 
 ⸻
