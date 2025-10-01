@@ -1,4 +1,4 @@
-Lección 6 — Editar usuario (editar.php)
+📘 Lección 6 — Editar usuario (editar.php)
 
 Parte A — Código limpio
 
