@@ -1,0 +1,31 @@
+/* Establece la fuente predeterminada y el color de fondo de la página */
+body {
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal y sans-serif como respaldo */
+    background-color: #f0f2f5; /* Color de fondo gris claro */
+}
+
+/* Estilos para el menú de navegación */
+.menu {
+    background-color: #1b1b1b; /* Color de fondo negro */
+    padding: 10px; /* Espaciado interno para mejorar la apariencia */
+}
+
+/* Estilos para la lista de enlaces dentro del menú */
+.menu .menu-links {
+    list-style: none; /* Elimina los estilos de lista predeterminados (viñetas) */
+    display: flex; /* Alinea los elementos en una fila horizontal */
+}
+
+/* Estilos para los enlaces dentro del menú */
+.menu .menu-links a {
+    color: white; /* Color de texto blanco para los enlaces */
+    padding: 10px; /* Espaciado interno alrededor del texto del enlace */
+    text-decoration: none; /* Elimina el subrayado predeterminado de los enlaces */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+    margin: 20px; /* Margen externo para separar el contenido del borde de la página */
+    padding: 20px; /* Espaciado interno para mejorar la legibilidad */
+    background-color: white; /* Fondo blanco para el contenido */
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Definimos el tipo de documento como HTML5 -->
+    <meta charset="UTF-8"> <!-- Establecemos la codificación de caracteres para admitir caracteres especiales como tildes y ñ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que la página sea responsive, adaptándose a diferentes tamaños de pantalla -->
+    <title>Sitio de Tecnología Mejorado</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace a la hoja de estilos CSS externa para dar formato a la página -->
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="menu"> <!-- Sección de menú de navegación con una clase "menu" para estilos -->
+        <ul class="menu-links"> <!-- Lista desordenada que contiene los enlaces de navegación -->
+            <li><a href="../intranet/index.html">Inicio</a></li> <!-- Enlace a la página principal -->
+            <li><a href="../intranet/register.html">Registro</a></li> <!-- Enlace a la página de registro -->
+            <li><a href="../intranet/login.html">Inicio de Sesión</a></li> <!-- Enlace a la página de inicio de sesión -->
+            <li id="restricted-menu" style="display: none;"> <!-- Elemento de menú oculto inicialmente -->
+                <a href="../intranet/intranet.php">Intranet</a> <!-- Enlace a la página de intranet -->
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="container"> <!-- Sección principal del contenido con una clase "container" para aplicar estilos -->
+        <h1>Bienvenidos al Sitio de Tecnología</h1> <!-- Encabezado principal de la página -->
+        <p>Contenido principal...</p> <!-- Párrafo con texto genérico, se puede reemplazar con contenido real -->
+    </div>
+
+    <!-- Inclusión de un archivo JavaScript externo para funcionalidad adicional -->
+    <script src="script.js"></script>
+</body>
+</html>
