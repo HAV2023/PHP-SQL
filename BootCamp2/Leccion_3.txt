@@ -166,7 +166,7 @@ Enlace de navegación a la página de login.
 	•	</body></html>
 Cierra el documento.
 
-Comprobación rápida
+🎯 Comprobación rápida
 	1.	Abre http://localhost/proyecto_crud/registrar.php.
 	2.	Crea un usuario.
 	3.	En phpMyAdmin: SELECT id,nombre,correo FROM usuarios ORDER BY id DESC LIMIT 5; y verifica el alta.
