@@ -1,20 +1,35 @@
 NOTAS ACLARATORIAS.
 
----
+Requisitos previos:
 
-Los ejercicios presentados están diseñados para trabajar con **MySQL Workbench**, por lo que será necesario descargar e instalar 
-**MySQL Community Installer** desde el sitio oficial de MySQL ([Centro de Descargas Oficial](https://dev.mysql.com/downloads/installer/)).  
+	1.	Instalar un stack de desarrollo web local, como:
+	•	XAMPP
+	•	MAMP
+	•	WAMP
+	•	Laragon
+	•	EasyPHP
+	•	AMPPS
 
-Durante la instalación, se recomienda configurar el servidor en el **puerto 3307** para evitar conflictos con otros entornos de desarrollo, 
-como el paquete **XAMPP**, que por defecto utiliza el puerto 3306.  
+	2.	Conservar la configuración por defecto durante la instalación.
+	•	Ejemplo: MySQL usa el puerto 3306.
 
-Asimismo, se proporciona un **script SQL** (db.sql) que facilita la instalación de la base de datos **"mi_base_datos"**, seguido de la creación de 
-la tabla **"users"**, permitiendo así la correcta implementación y ejecución de los ejercicios planteados.
+⸻
 
-No olviden que para ejecutar archivos .php deben tener instalado en su computadora algún paquete de servidores de desarrollo local, o
-"stacks de servidores web" como XAMPP, MAMP, WAMP, Laragon, EasyPHP, AMPPS, etc. 
+Preparación de la base de datos
+	1.	Abrir phpMyAdmin desde el stack instalado.
+	2.	Importar el archivo db.sql.
+	3.	Este script creará automáticamente:
+	•	La base de datos mi_base_datos.
+	•	La tabla users.
 
-Algunas recomendaciones:
+⸻
+
+Ejecución de los ejercicios
+	1.	Guardar los archivos con extensión .php en la carpeta de proyectos del stack (ejemplo: htdocs en XAMPP).
+	2.	Acceder al navegador y ejecutar los scripts a través de http://localhost/.
+	3.	Verificar que la base de datos y la tabla estén activas para la correcta implementación de los ejercicios.
+
+Algunas sugerencias:
 
 🔹 Para Windows
 
