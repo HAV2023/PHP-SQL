@@ -1,6 +1,6 @@
 <?php
 // Definir el nombre del servidor y el puerto donde se ejecuta MySQL
-$host = 'localhost:3307'; // En este caso, el puerto 3307 en lugar del predeterminado 3306
+$host = 'localhost:3306'; // Puerto predeterminado 3306
 
 // Nombre de la base de datos a la que se va a conectar
 $dbname = 'mi_base_datos'; // Cambiar según la base de datos que se desea usar
@@ -8,7 +8,7 @@ $dbname = 'mi_base_datos'; // Cambiar según la base de datos que se desea usar
 // Usuario de la base de datos (por defecto en entornos locales suele ser 'root')
 $user = 'root';
 
-// Contraseña del usuario (en este caso, '1234', pero debe cambiarse en producción por seguridad)
+// Contraseña del usuario (en este caso, '1234' o nada según el caso, pero debe cambiarse en producción por seguridad)
 $pass = '1234';
 
 try {
