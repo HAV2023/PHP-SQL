@@ -1,4 +1,4 @@
-🔥Versión final del archivo registrar.php usando la plantilla estética y con el formulario integrado.
+⚡Versión final del archivo registrar.php usando la plantilla estética y con el formulario integrado.
 
 ⸻
 
