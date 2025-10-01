@@ -1,4 +1,4 @@
-⚡Vamos a cerrar el CRUD completo con la misma estética.
+📦 Vamos a cerrar el CRUD completo con la misma estética.
 
 ⸻
 
