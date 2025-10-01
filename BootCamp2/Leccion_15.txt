@@ -1,1 +1,53 @@
+Aquí tienen una versión coherente y estilizada de salir.php. Aunque el cierre de sesión es muy simple (vaciar variables y redirigir), la versión estilizada muestra un mensaje de confirmación antes de enviar al login.
 
+⸻
+
+📂 Archivo: salir.php
+
+<?php
+require_once "conexion.php";
+
+/* Destruir la sesión */
+$_SESSION = [];
+session_unset();
+session_destroy();
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sesión cerrada</title>
+  <link rel="stylesheet" href="estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="3;url=iniciar_sesion.php">
+</head>
+<body>
+  <div class="contenedor">
+    <div class="tarjeta">
+      <div class="encabezado">
+        <h1>Sesión cerrada</h1>
+      </div>
+      <p class="sub">Has salido del sistema correctamente.</p>
+
+      <p class="mensaje mensaje--ok">
+        Serás redirigido en unos segundos a la página de inicio de sesión.
+      </p>
+
+      <div class="barra-acciones">
+        <a class="boton" href="iniciar_sesion.php">Ir ahora</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+⸻
+
+🔎 Qué incluye
+	•	Cierre completo de sesión (session_unset(), session_destroy()).
+	•	Mensaje amigable dentro de una tarjeta estilizada.
+	•	Redirección automática en 3 segundos a iniciar_sesion.php (meta refresh).
+	•	Botón de acción “Ir ahora” para acceder de inmediato.
+
+⸻
