@@ -1,4 +1,4 @@
-Aquí tienen la versión completa y estilizada de privado.php, lista para integrarse con estilo.css y mantener coherencia con registrar.php e iniciar_sesion.php.
+⚡Aquí tienen la versión completa y estilizada de privado.php, lista para integrarse con estilo.css y mantener coherencia con registrar.php e iniciar_sesion.php.
 
 ⸻
 
