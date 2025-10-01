@@ -1,1 +1,93 @@
+Lección 7 — Eliminar usuario (eliminar.php)
 
+⸻
+
+Parte A — Código limpio
+
+<?php
+require_once "conexion.php";
+
+/* 1) Validar parámetro id */
+$id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
+if ($id <= 0) {
+    die("ID inválido.");
+}
+
+/* 2) Verificar existencia previa */
+$sql_sel = "SELECT id FROM usuarios WHERE id = ?";
+$sentencia_sel = $conexion->prepare($sql_sel);
+if (!$sentencia_sel) { die("Error al preparar la consulta: " . $conexion->error); }
+$sentencia_sel->bind_param("i", $id);
+$sentencia_sel->execute();
+$resultado = $sentencia_sel->get_result();
+if (!$resultado || $resultado->num_rows !== 1) {
+    die("Usuario no encontrado.");
+}
+$sentencia_sel->close();
+
+/* 3) Ejecutar eliminación */
+$sql_del = "DELETE FROM usuarios WHERE id = ?";
+$sentencia_del = $conexion->prepare($sql_del);
+if (!$sentencia_del) { die("Error al preparar la eliminación: " . $conexion->error); }
+$sentencia_del->bind_param("i", $id);
+
+if ($sentencia_del->execute()) {
+    $sentencia_del->close();
+    header("Location: privado.php");
+    exit;
+} else {
+    $sentencia_del->close();
+    die("Error al eliminar: " . $conexion->error);
+}
+
+
+⸻
+
+Parte B — Explicación línea por línea
+
+1) Validación del identificador
+	•	$id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
+Recupera el valor de id enviado en la URL. Lo convierte a entero. Si no existe, usa 0.
+	•	if ($id <= 0) { die("ID inválido."); }
+Evita ejecutar la lógica si el valor no es positivo. die() detiene el script y muestra el texto.
+
+2) Verificación de existencia
+	•	$sql_sel = "SELECT id FROM usuarios WHERE id = ?";
+Consulta SQL con un marcador ? para asegurar que el id existe en la tabla.
+	•	$conexion->prepare($sql_sel);
+Prepara la sentencia en MySQL, segura contra inyección.
+	•	$sentencia_sel->bind_param("i", $id);
+Asocia el parámetro id como entero ("i").
+	•	$sentencia_sel->execute();
+Ejecuta la sentencia.
+	•	$resultado = $sentencia_sel->get_result();
+Obtiene el resultado en forma de conjunto de filas.
+	•	if (!$resultado || $resultado->num_rows !== 1)
+Si no encuentra exactamente un registro, corta ejecución con “Usuario no encontrado.”.
+	•	$sentencia_sel->close();
+Libera la sentencia usada para la verificación.
+
+3) Eliminación
+	•	$sql_del = "DELETE FROM usuarios WHERE id = ?";
+Sentencia SQL para borrar un registro por id.
+	•	$sentencia_del = $conexion->prepare($sql_del);
+Prepara la sentencia de eliminación.
+	•	$sentencia_del->bind_param("i", $id);
+Enlaza el valor entero al marcador ?.
+	•	if ($sentencia_del->execute()) { ... } else { ... }
+Intenta ejecutar la eliminación:
+	•	Éxito → cierra sentencia, redirige al listado privado.php.
+	•	Falla → cierra sentencia y muestra error detallado.
+
+⸻
+
+🔎 Pruebas sugeridas
+	1.	Desde privado.php, clic en Eliminar en un usuario existente.
+➝ El registro debe desaparecer y volver al listado.
+	2.	Probar eliminar.php?id=99999.
+➝ Mensaje: “Usuario no encontrado.”
+	3.	Probar eliminar.php?id=texto.
+➝ Mensaje: “ID inválido.”
+	4.	Verificar en phpMyAdmin que el registro realmente fue borrado.
+
+⸻
