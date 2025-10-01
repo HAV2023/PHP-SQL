@@ -1,4 +1,4 @@
-🔥 Aquí tienen una plantilla mínima reutilizable con la estética y usabilidad que definimos. Les servirá como base para todas sus páginas (registrar.php, iniciar_sesion.php, privado.php, etc.), solo deben cambiar el contenido central.
+🔍 Aquí tienen una plantilla mínima reutilizable con la estética y usabilidad que definimos. Les servirá como base para todas sus páginas (registrar.php, iniciar_sesion.php, privado.php, etc.), solo deben cambiar el contenido central.
 
 ⸻
 
