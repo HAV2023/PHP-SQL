@@ -1,6 +1,6 @@
 ✅ Paso 1: Crear una Nueva Página Restringida
 
-Supongamos que queremos agregar una página llamada "Panel de Control" (panel.php), solo accesible para usuarios autenticados.
+Pensemos que queremos agregar una página llamada "Panel de Control" (panel.php), solo accesible para usuarios autenticados.
 
 📌 Crear un nuevo archivo panel.php con este contenido:
 
