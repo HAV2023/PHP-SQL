@@ -1,1 +1,170 @@
+Lección 4 — Inicio de sesión (validación de credenciales + sesión)
 
+Parte A — Código limpio (iniciar_sesion.php)
+
+<?php
+require_once "conexion.php";
+
+$mensaje = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $correo     = trim($_POST["correo"] ?? "");
+    $contrasena = $_POST["contrasena"] ?? "";
+
+    if ($correo === "" || $contrasena === "") {
+        $mensaje = "Ingresa tu correo y tu contraseña.";
+    } else {
+        $sql = "SELECT id, nombre, correo, contrasena_hash
+                FROM usuarios
+                WHERE correo = ?";
+        $sentencia = $conexion->prepare($sql);
+
+        if ($sentencia) {
+            $sentencia->bind_param("s", $correo);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+
+            if ($resultado && $resultado->num_rows === 1) {
+                $usuario = $resultado->fetch_assoc();
+
+                if (password_verify($contrasena, $usuario["contrasena_hash"])) {
+                    $_SESSION["usuario_id"]     = $usuario["id"];
+                    $_SESSION["usuario_nombre"] = $usuario["nombre"];
+                    $_SESSION["usuario_correo"] = $usuario["correo"];
+
+                    header("Location: privado.php");
+                    exit;
+                } else {
+                    $mensaje = "Contraseña incorrecta.";
+                }
+            } else {
+                $mensaje = "No existe una cuenta con ese correo.";
+            }
+
+            $sentencia->close();
+        } else {
+            $mensaje = "Error al preparar la consulta: " . $conexion->error;
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Iniciar sesión</h1>
+
+  <?php if ($mensaje !== ""): ?>
+    <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+  <?php endif; ?>
+
+  <form method="post" action="iniciar_sesion.php" novalidate>
+    <label for="correo">Correo</label>
+    <input id="correo" name="correo" type="email" required maxlength="120" autocomplete="email">
+
+    <label for="contrasena">Contraseña</label>
+    <input id="contrasena" name="contrasena" type="password" required minlength="6" autocomplete="current-password">
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p>¿No tienes cuenta? <a href="registrar.php">Regístrate</a></p>
+</body>
+</html>
+
+Parte B — Explicación detallada línea por línea
+
+Bloque PHP
+	•	<?php
+Marca el inicio del código PHP.
+	•	require_once "conexion.php";
+Incluye una única vez el archivo de conexión. Provee $conexion y una sesión iniciada.
+	•	$mensaje = "";
+Crea una variable de texto vacía para mostrar retroalimentación.
+	•	if ($_SERVER["REQUEST_METHOD"] === "POST") {
+Comprueba el método HTTP de la solicitud. Solo procesa si el formulario fue enviado por POST.
+	•	$correo     = trim($_POST["correo"] ?? "");
+Lee el valor de correo del envío. Si no existe la clave, usa "".
+La función trim() recorta espacios en blanco al inicio y al final.
+	•	$contrasena = $_POST["contrasena"] ?? "";
+Lee la contraseña tal cual fue escrita. Si no existe, usa "".
+	•	if ($correo === "" || $contrasena === "") {
+Valida que ambos campos tengan contenido. El operador || significa “o”.
+	•	$mensaje = "Ingresa tu correo y tu contraseña.";
+Asigna texto de error para campos vacíos.
+	•	$sql = "SELECT id, nombre, correo, contrasena_hash FROM usuarios WHERE correo = ?";
+Declara consulta SQL con un marcador ? para usar una sentencia preparada.
+	•	$sentencia = $conexion->prepare($sql);
+Solicita al servidor que prepare la consulta. Devuelve un objeto mysqli_stmt o false.
+	•	if ($sentencia) {
+Comprueba que la preparación no falló.
+	•	$sentencia->bind_param("s", $correo);
+Enlaza el parámetro al marcador. "s" indica string.
+	•	$sentencia->execute();
+Ejecuta la sentencia preparada en el servidor.
+	•	$resultado = $sentencia->get_result();
+Obtiene un mysqli_result con las filas devueltas por la consulta.
+	•	if ($resultado && $resultado->num_rows === 1) {
+Verifica que llegó exactamente una fila para ese correo.
+	•	$usuario = $resultado->fetch_assoc();
+Convierte la fila en arreglo asociativo: claves iguales a los nombres de columna.
+	•	if (password_verify($contrasena, $usuario["contrasena_hash"])) {
+Compara la contraseña en texto con el hash almacenado usando password_verify.
+	•	$_SESSION["usuario_id"] = $usuario["id"];
+Guarda el identificador del usuario en la sesión.
+	•	$_SESSION["usuario_nombre"] = $usuario["nombre"];
+Guarda el nombre del usuario en la sesión.
+	•	$_SESSION["usuario_correo"] = $usuario["correo"];
+Guarda el correo del usuario en la sesión.
+	•	header("Location: privado.php");
+Envía una cabecera HTTP de redirección al navegador para cargar privado.php.
+	•	exit;
+Detiene la ejecución tras enviar la redirección.
+	•	else { $mensaje = "Contraseña incorrecta."; }
+Mensaje de error cuando la verificación de contraseña falla.
+	•	else { $mensaje = "No existe una cuenta con ese correo."; }
+Mensaje cuando la búsqueda por correo no devolvió ninguna fila.
+	•	$sentencia->close();
+Libera recursos de la sentencia preparada.
+	•	else { $mensaje = "Error al preparar la consulta: " . $conexion->error; }
+Mensaje cuando prepare() no pudo construirse en el servidor.
+
+Bloque HTML
+	•	<!DOCTYPE html>
+Declara HTML5.
+	•	<html lang="es">
+Documento en español.
+	•	<meta charset="UTF-8">
+Codificación UTF-8 para caracteres acentuados.
+	•	<title>Iniciar sesión</title>
+Título de la pestaña.
+	•	<link rel="stylesheet" href="estilo.css">
+Carga la hoja de estilos.
+	•	<meta name="viewport" content="width=device-width, initial-scale=1">
+Adaptación a pantallas móviles.
+	•	<h1>Iniciar sesión</h1>
+Encabezado principal.
+	•	<?php if ($mensaje !== ""): ?> ... <?php endif; ?>
+Bloque condicional que imprime el párrafo con el mensaje si existe texto.
+	•	<form method="post" action="iniciar_sesion.php" novalidate>
+Formulario que envía por POST al mismo archivo. novalidate evita bloqueos de validación nativa en demos.
+	•	<input id="correo" name="correo" type="email" ...>
+Campo de correo. type="email" agrega validación básica y teclado adecuado en móviles.
+	•	<input id="contrasena" name="contrasena" type="password" ...>
+Campo de contraseña. minlength="6" fija un mínimo local.
+	•	<button type="submit">Entrar</button>
+Envía datos al servidor.
+	•	<a href="registrar.php">Regístrate</a>
+Enlace para ir al registro si no tiene cuenta.
+
+Comprobación rápida
+	1.	Crea un usuario desde registrar.php.
+	2.	Abre http://localhost/proyecto_crud/iniciar_sesion.php.
+	3.	Prueba con correo y contraseña correctos: debe llevarte a privado.php.
+	4.	Prueba contraseña errónea: debe mostrar “Contraseña incorrecta.”
+	5.	Prueba un correo inexistente: debe mostrar “No existe una cuenta con ese correo.”
