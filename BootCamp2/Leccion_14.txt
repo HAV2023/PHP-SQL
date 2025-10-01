@@ -1,4 +1,4 @@
-Aquí tienen una versión coherente y estilizada de salir.php. Aunque el cierre de sesión es muy simple (vaciar variables y redirigir), la versión estilizada muestra un mensaje de confirmación antes de enviar al login.
+⚡Aquí tienen una versión coherente y estilizada de salir.php. Aunque el cierre de sesión es muy simple (vaciar variables y redirigir), la versión estilizada muestra un mensaje de confirmación antes de enviar al login.
 
 ⸻
 
