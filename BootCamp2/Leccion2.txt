@@ -1,1 +1,89 @@
+📘 Lección 2 — Conexión PHP ↔ MySQL
 
+🎯 Objetivo
+
+Aprender a conectar un archivo PHP con la base de datos MySQL que creamos en la Lección 1. Esto es la base de todo el Boot Camp: sin conexión, no hay CRUD.
+
+⸻
+
+📂 Archivo: conexion.php
+
+Parte A — Código limpio
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$servidor_bd   = "localhost";
+$usuario_bd    = "root";
+$contrasena_bd = "";
+$nombre_bd     = "mi_base_datos";
+
+$conexion = new mysqli($servidor_bd, $usuario_bd, $contrasena_bd, $nombre_bd);
+
+if ($conexion->connect_error) {
+    die("Error de conexión a MySQL: " . $conexion->connect_error);
+}
+
+if (!$conexion->set_charset("utf8mb4")) {
+    die("Error al configurar UTF-8: " . $conexion->error);
+}
+
+
+⸻
+
+Parte B — Explicación línea por línea
+	•	<?php
+Inicio del bloque de código PHP. Todo lo que esté dentro será procesado en el servidor.
+	•	if (session_status() === PHP_SESSION_NONE) { ... }
+La función session_status() devuelve el estado de la sesión:
+	•	PHP_SESSION_NONE: no hay sesión activa.
+	•	PHP_SESSION_ACTIVE: ya existe sesión activa.
+	•	PHP_SESSION_DISABLED: sesiones deshabilitadas.
+La condición === PHP_SESSION_NONE pregunta: “¿no hay sesión activa?”.
+	•	session_start();
+Si no hay sesión, esta instrucción crea una nueva.
+➝ A partir de aquí podemos guardar variables en $_SESSION.
+	•	$servidor_bd   = "localhost";
+Se declara la variable $servidor_bd con el texto "localhost".
+➝ “localhost” significa que MySQL está en la misma computadora que el servidor web.
+	•	$usuario_bd    = "root";
+Variable $usuario_bd con el valor "root".
+➝ Usuario administrador por defecto de MySQL.
+	•	$contrasena_bd = "";
+Variable $contrasena_bd vacía.
+➝ En XAMPP normalmente root no tiene contraseña.
+➝ En MAMP suele ser "root".
+	•	$nombre_bd     = "mi_base_datos";
+Variable con el nombre de la base que creamos en la lección anterior.
+	•	$conexion = new mysqli(...);
+Crea un objeto de conexión usando la clase mysqli.
+➝ Recibe servidor, usuario, contraseña y base de datos.
+➝ Si todo está bien, $conexion es la llave para ejecutar consultas SQL.
+	•	if ($conexion->connect_error) { ... }
+Evalúa si hubo error al conectar.
+➝ $conexion->connect_error devuelve el mensaje de error en caso de fallo.
+	•	die("Error de conexión a MySQL: " . $conexion->connect_error);
+La función die() detiene la ejecución y muestra el mensaje entre comillas.
+➝ Se concatena (.) con el error detallado.
+	•	if (!$conexion->set_charset("utf8mb4")) { ... }
+Configura el conjunto de caracteres de la conexión.
+➝ set_charset("utf8mb4") asegura que se guarden bien acentos, eñes y emojis.
+➝ El símbolo ! significa “no”. Si no se puede configurar, se ejecuta el bloque.
+	•	die("Error al configurar UTF-8: " . $conexion->error);
+Si ocurre un error al aplicar UTF-8, se detiene el programa y se muestra el mensaje.
+
+⸻
+
+✅ Verificación
+	1.	Guarda el archivo como conexion.php dentro de proyecto_crud/.
+	2.	Abre en navegador:
+
+http://localhost/proyecto_crud/conexion.php
+
+
+	3.	Si no hay errores, la página queda en blanco (conexión correcta).
+	4.	Si hay errores, verás el mensaje correspondiente.
+
+⸻
