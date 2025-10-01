@@ -1,1 +1,173 @@
+Lección 3 — Registro de usuarios (formulario + alta segura)
 
+Parte A — Código limpio (registrar.php)
+
+<?php
+require_once "conexion.php";
+
+$mensaje = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre     = trim($_POST["nombre"] ?? "");
+    $correo     = trim($_POST["correo"] ?? "");
+    $contrasena = $_POST["contrasena"] ?? "";
+
+    if ($nombre === "" || $correo === "" || $contrasena === "") {
+        $mensaje = "Completa todos los campos.";
+    } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $mensaje = "El correo no es válido.";
+    } else {
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO usuarios (nombre, correo, contrasena_hash) VALUES (?, ?, ?)";
+        $sentencia = $conexion->prepare($sql);
+
+        if ($sentencia) {
+            $sentencia->bind_param("sss", $nombre, $correo, $contrasena_hash);
+            if ($sentencia->execute()) {
+                $mensaje = "Registro exitoso. Ahora puedes iniciar sesión.";
+            } else {
+                if ($conexion->errno === 1062) {
+                    $mensaje = "El correo ya está registrado.";
+                } else {
+                    $mensaje = "Error al registrar: " . $conexion->error;
+                }
+            }
+            $sentencia->close();
+        } else {
+            $mensaje = "Error al preparar la sentencia: " . $conexion->error;
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Registro de usuario</h1>
+
+  <?php if ($mensaje !== ""): ?>
+    <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+  <?php endif; ?>
+
+  <form method="post" action="registrar.php" novalidate>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" required maxlength="100" autocomplete="name">
+
+    <label for="correo">Correo</label>
+    <input id="correo" name="correo" type="email" required maxlength="120" autocomplete="email">
+
+    <label for="contrasena">Contraseña</label>
+    <input id="contrasena" name="contrasena" type="password" required minlength="6" autocomplete="new-password">
+
+    <button type="submit">Crear cuenta</button>
+  </form>
+
+  <p>¿Ya tienes cuenta? <a href="iniciar_sesion.php">Inicia sesión</a></p>
+</body>
+</html>
+
+Parte B — Explicación detallada línea por línea
+
+Bloque PHP
+	•	<?php
+Inicia la sección de código PHP.
+	•	require_once "conexion.php";
+Carga una vez el archivo de conexión para disponer de la variable $conexion y de la sesión iniciada.
+	•	$mensaje = "";
+Declara una variable de texto vacía para mostrar retroalimentación al usuario.
+	•	if ($_SERVER["REQUEST_METHOD"] === "POST") {
+Comprueba el método de la solicitud HTTP. Si es POST, significa que el formulario fue enviado y se debe procesar.
+	•	$nombre     = trim($_POST["nombre"] ?? "");
+Lee la clave nombre del arreglo $_POST. Usa el operador de fusión nula ?? para asignar "" si no existe. trim() elimina espacios al inicio y al final.
+	•	$correo     = trim($_POST["correo"] ?? "");
+Igual que la línea anterior, pero para el campo correo.
+	•	$contrasena = $_POST["contrasena"] ?? "";
+Lee la contraseña enviada. No se recortan espacios en blanco, pero se acepta que venga tal cual.
+	•	if ($nombre === "" || $correo === "" || $contrasena === "") {
+Valida que ningún campo venga vacío. El operador lógico || es “o”.
+	•	$mensaje = "Completa todos los campos.";
+Asigna el texto de error si falta algún dato.
+	•	} elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+Rama alternativa: verifica formato de correo con filter_var. El ! niega el resultado. Si no cumple el patrón de email, entra aquí.
+	•	$mensaje = "El correo no es válido.";
+Mensaje específico para formato de correo incorrecto.
+	•	} else {
+Si pasó las validaciones, continúa el flujo de registro.
+	•	$contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+Genera un hash seguro de la contraseña usando el algoritmo por defecto (actualmente bcrypt/argon según versión de PHP).
+	•	$sql = "INSERT INTO usuarios (nombre, correo, contrasena_hash) VALUES (?, ?, ?)";
+Declara la instrucción SQL con marcadores ? para usar una sentencia preparada.
+	•	$sentencia = $conexion->prepare($sql);
+Prepara la sentencia en el servidor. Devuelve un objeto de tipo mysqli_stmt en éxito o false en error.
+	•	if ($sentencia) {
+Verifica que la preparación fue correcta.
+	•	$sentencia->bind_param("sss", $nombre, $correo, $contrasena_hash);
+Asocia variables a los marcadores ?. La cadena "sss" indica tres parámetros de tipo string.
+	•	if ($sentencia->execute()) {
+Ejecuta la sentencia en el servidor. Si la inserción fue correcta, devuelve true.
+	•	$mensaje = "Registro exitoso. Ahora puedes iniciar sesión.";
+Mensaje de confirmación para el usuario.
+	•	} else {
+Rama cuando execute() falla.
+	•	if ($conexion->errno === 1062) {
+Revisa el código de error de MySQL. 1062 corresponde a entrada duplicada (choca con índice UNIQUE), típico cuando el correo ya existe.
+	•	$mensaje = "El correo ya está registrado.";
+Mensaje específico para duplicado.
+	•	} else { $mensaje = "Error al registrar: " . $conexion->error; }
+Mensaje genérico concatenando el detalle de error que reporta MySQL.
+	•	$sentencia->close();
+Cierra la sentencia preparada y libera recursos.
+	•	} else { $mensaje = "Error al preparar la sentencia: " . $conexion->error; }
+Si prepare() falló, informa el motivo.
+	•	} (cierre de los bloques if y else)
+Finaliza el procesamiento del formulario.
+
+Bloque HTML
+	•	<!DOCTYPE html>
+Declara el tipo de documento como HTML5.
+	•	<html lang="es">
+Inicia el árbol HTML e indica idioma español.
+	•	<head> … </head>
+Encabezado del documento: metadatos y enlaces.
+	•	<meta charset="UTF-8">
+Define la codificación a UTF-8 para acentos y eñes.
+	•	<title>Registro</title>
+Título de la pestaña del navegador.
+	•	<link rel="stylesheet" href="estilo.css">
+Vincula la hoja de estilos externa.
+	•	<meta name="viewport" content="width=device-width, initial-scale=1">
+Ajuste responsivo para dispositivos móviles.
+	•	<body>
+Cuerpo visual del documento.
+	•	<h1>Registro de usuario</h1>
+Encabezado principal.
+	•	<?php if ($mensaje !== ""): ?> ... <?php endif; ?>
+Bloque condicional embebido en HTML. Si $mensaje no es vacío, imprime el párrafo con la clase mensaje.
+	•	<form method="post" action="registrar.php" novalidate>
+Inicia formulario. method="post" define envío por POST. action indica el mismo archivo. novalidate desactiva validación HTML para dejar la responsabilidad al servidor (y evitar bloqueos en demos).
+	•	<label for="nombre">Nombre</label>
+Etiqueta asociada al control cuyo id es nombre.
+	•	<input id="nombre" name="nombre" type="text" required maxlength="100" autocomplete="name">
+Campo de texto. required exige contenido. maxlength limita longitud. autocomplete sugiere al navegador el tipo de dato.
+	•	<label for="correo">Correo</label> / <input ... type="email" ...>
+Campo de email. El type="email" activa validación básica del navegador y teclado adecuado en móviles.
+	•	<label for="contrasena">Contraseña</label> / <input ... type="password" ... minlength="6" autocomplete="new-password">
+Campo de contraseña. minlength="6" fija mínimo local. autocomplete="new-password" orienta a administrador de contraseñas.
+	•	<button type="submit">Crear cuenta</button>
+Botón que envía el formulario.
+	•	<p>¿Ya tienes cuenta? <a href="iniciar_sesion.php">Inicia sesión</a></p>
+Enlace de navegación a la página de login.
+	•	</body></html>
+Cierra el documento.
+
+Comprobación rápida
+	1.	Abre http://localhost/proyecto_crud/registrar.php.
+	2.	Crea un usuario.
+	3.	En phpMyAdmin: SELECT id,nombre,correo FROM usuarios ORDER BY id DESC LIMIT 5; y verifica el alta.
+	4.	Repite con el mismo correo para ver el mensaje de duplicado.
