@@ -1,19 +1,18 @@
-NOTAS ACLARATORIAS.
+NOTAS ACLARATORIAS
 
-Requisitos previos:
-
-	1.	Instalar un stack de desarrollo web local, como:
-	•	XAMPP
-	•	MAMP
-	•	WAMP
-	•	Laragon
-	•	EasyPHP
-	•	AMPPS
-
-	2.	Conservar la configuración por defecto durante la instalación.
-	•	Ejemplo: MySQL usa el puerto 3306.
-
-⸻
+Requisitos previos
+	
+1.	Instalar un stack de desarrollo web local. Opciones recomendadas:
+	•	XAMPP (multiplataforma: Windows, Linux, macOS).
+	•	MAMP (enfocado en macOS, fácil de instalar y configurar).
+	•	WAMP (Windows).
+	•	Laragon (Windows, ligero y portable).
+	•	EasyPHP (Windows).
+	•	AMPPS (multiplataforma).
+	•	Docker + Devilbox o Bitnami Stacks (flexibilidad en Mac y Linux).
+	
+2.	Mantener la configuración por defecto durante la instalación.
+	•	Ejemplo: MySQL suele utilizar el puerto 3306.
 
 Preparación de la base de datos
 	1.	Abrir phpMyAdmin desde el stack instalado.
@@ -22,37 +21,46 @@ Preparación de la base de datos
 	•	La base de datos mi_base_datos.
 	•	La tabla users.
 
+Ejecución de los ejercicios
+	
+1.	Guardar los archivos con extensión .php en la carpeta de proyectos del stack
+	•	Ejemplo: htdocs en XAMPP o MAMP/htdocs en macOS.
+	
+2.	Abrir el navegador y ejecutar los scripts desde:
+
+http://localhost/
+
+3.	Verificar que la base de datos y la tabla estén activas para asegurar la correcta implementación de los ejercicios.
+
+Sugerencias por sistema operativo
+
+🔹 Windows
+	•	✅ Laragon → Ligero, rápido y portátil. Ideal para PHP y Node.js, soporta múltiples versiones de PHP.
+	•	✅ WAMP → Entorno clásico exclusivo para Windows.
+	•	✅ XAMPP → Multiplataforma, fácil de usar.
+
+🍏 macOS
+	•	✅ MAMP → La opción más sencilla en Mac. Incluye Apache, MySQL y PHP listos para usar.
+	•	✅ XAMPP → Compatible en Mac, aunque menos optimizado que MAMP.
+	•	✅ Docker + Devilbox → Alternativa moderna y flexible si necesitas entornos personalizados.
+
+🐧 Linux
+	•	✅ LAMP (Apache, MySQL/MariaDB, PHP) → Instalación nativa, rápida y optimizada.
+	•	✅ LAPP (Apache, PostgreSQL, PHP) → Ideal si prefieres PostgreSQL en lugar de MySQL.
+	•	✅ Docker + Bitnami Stacks → Para mayor flexibilidad y compatibilidad entre entornos.
+
 ⸻
 
-Ejecución de los ejercicios
-	1.	Guardar los archivos con extensión .php en la carpeta de proyectos del stack (ejemplo: htdocs en XAMPP).
-	2.	Acceder al navegador y ejecutar los scripts a través de http://localhost/.
-	3.	Verificar que la base de datos y la tabla estén activas para la correcta implementación de los ejercicios.
+Verificación de la conexión
 
-Algunas sugerencias:
+Se incluye un archivo de prueba: test_db.php.
 
-🔹 Para Windows
+Ejecutar en el navegador:
 
-✅ Laragon – Ligero, rápido y portátil. Ideal para proyectos en PHP y Node.js. Soporta múltiples versiones de PHP.
-✅ WAMP – Si solo trabajas en Windows y prefieres un entorno clásico.
-✅ XAMPP – Si necesitan compatibilidad con múltiples plataformas y facilidad de uso.
+http://localhost/intranet/test_db.php
 
-🍏 Para macOS
+Ejemplo de salida:
 
-✅ MAMP – Fácil de instalar y configurar en Mac. Soporta PHP y MySQL.
-✅ Docker + Devilbox – Si buscan flexibilidad y escalabilidad en tus entornos.
+✅ Conexión exitosa. Usuarios en la base de datos: 2
 
-🐧 Para Linux
-
-✅ LAMP (Apache, MySQL/MariaDB, PHP) – Instalación nativa y optimizada para Linux.
-✅ LAPP (con PostgreSQL en lugar de MySQL) – Si prefieren PostgreSQL en lugar de MySQL.
-✅ Docker + Bitnami Stacks – Para mayor flexibilidad y compatibilidad con distintos entornos.
-
-También proporciono un archivo para verificar la exitosa conexión a la base de datos, llamado test_db.php
-Ejecútenlo de la siguiente forma: http://localhost/intranet/test_db.php, para mi caso, el resultado es:
-
-✅ Conexión exitosa. Usuarios en la base de datos: 2 (Por la razón de que tengo 2 usuarios en mi tabla Users)
-
-Saludos.
-
----  
+(En este caso, porque la tabla users contiene 2 registros).
