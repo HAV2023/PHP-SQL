@@ -1,1 +1,215 @@
+Lección 8 — Estética y usabilidad (CSS limpio + pequeños ajustes en HTML)
 
+Parte A — Código limpio (estilo.css)
+
+/* --------- Base --------- */
+:root{
+  --fondo:#f6f8fb;
+  --card:#ffffff;
+  --borde:#e6eaf0;
+  --texto:#1f2d3d;
+  --texto-sec:#5a6b7b;
+  --primario:#0b5cab;
+  --primario-osc:#084a8c;
+  --ok:#2e7d32;
+  --alerta:#c62828;
+  --focus:#6aa9ff;
+  --sombra:0 6px 16px rgba(15, 23, 42, .08);
+}
+
+*{box-sizing:border-box}
+html{font-size:16px}
+body{
+  margin:0; padding:24px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.55; color:var(--texto); background:var(--fondo);
+}
+
+/* --------- Layout simple --------- */
+.contenedor{max-width:880px; margin:0 auto}
+.tarjeta{
+  background:var(--card); border:1px solid var(--borde);
+  border-radius:14px; box-shadow:var(--sombra); padding:22px; margin-bottom:18px;
+}
+.encabezado{display:flex; align-items:center; gap:12px; margin-bottom:8px}
+.encabezado h1,.encabezado h2{margin:0; color:var(--primario)}
+.sub{color:var(--texto-sec); margin:6px 0 0}
+
+/* --------- Formularios --------- */
+form{display:grid; gap:14px; margin-top:10px}
+.campo{display:grid; gap:8px}
+label{font-weight:600}
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+  padding:10px 12px; border:1px solid var(--borde); border-radius:10px;
+  background:#fff; color:var(--texto);
+}
+input:focus{
+  outline:3px solid var(--focus);
+  border-color:var(--primario);
+}
+
+/* --------- Botones --------- */
+.barra-acciones{display:flex; gap:10px; flex-wrap:wrap}
+.boton{
+  appearance:none; border:0; cursor:pointer;
+  padding:10px 14px; border-radius:10px; font-weight:600;
+  background:var(--primario); color:#fff; box-shadow:var(--sombra);
+}
+.boton:hover{background:var(--primario-osc)}
+.boton-sec{
+  background:#eef2f7; color:var(--texto);
+}
+.boton-sec:hover{background:#e5ebf3}
+
+/* --------- Mensajes --------- */
+.mensaje{
+  border:1px solid var(--borde); background:#f3f7ff; color:#073b74;
+  padding:10px 12px; border-radius:10px;
+}
+.mensaje--ok{background:#eef8f0; color:var(--ok)}
+.mensaje--error{background:#fdeeee; color:var(--alerta)}
+
+/* --------- Tablas --------- */
+.tabla{
+  width:100%; border-collapse:separate; border-spacing:0; background:#fff;
+  border:1px solid var(--borde); border-radius:12px; overflow:hidden;
+}
+.tabla th,.tabla td{padding:12px 14px; text-align:left}
+.tabla thead th{background:#f0f4ff; color:#002b67; font-weight:700}
+.tabla tbody tr+tr td{border-top:1px solid var(--borde)}
+.filas-acciones a{margin-right:10px}
+
+/* --------- Utilidades --------- */
+.hr{height:1px; background:var(--borde); border:0; margin:14px 0}
+.nav a{margin-right:12px; color:var(--primario); text-decoration:none; font-weight:600}
+.nav a:hover{text-decoration:underline}
+
+Ajustes mínimos en HTML (aplícalos en tus páginas)
+	1.	Envuelve el contenido en un contenedor y tarjeta:
+
+<div class="contenedor">
+  <div class="tarjeta">
+    <div class="encabezado">
+      <h1>Registro de usuario</h1>
+    </div>
+    <p class="sub">Crea una cuenta para acceder a la zona privada.</p>
+
+    <!-- contenido de la página -->
+  </div>
+</div>
+
+	2.	Estructura de formulario con clases:
+
+<form method="post" action="registrar.php" novalidate>
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" required maxlength="100" autocomplete="name">
+  </div>
+
+  <div class="campo">
+    <label for="correo">Correo</label>
+    <input id="correo" name="correo" type="email" required maxlength="120" autocomplete="email">
+  </div>
+
+  <div class="campo">
+    <label for="contrasena">Contraseña</label>
+    <input id="contrasena" name="contrasena" type="password" required minlength="6" autocomplete="new-password">
+  </div>
+
+  <div class="barra-acciones">
+    <button class="boton" type="submit">Crear cuenta</button>
+    <a class="boton boton-sec" href="iniciar_sesion.php">Ir a iniciar sesión</a>
+  </div>
+</form>
+
+	3.	Mensajes con variantes:
+
+<?php if ($mensaje !== ""): ?>
+  <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+<?php endif; ?>
+
+Puedes alternar mensaje--ok o mensaje--error según el caso:
+
+<p class="mensaje mensaje--ok">Registro exitoso.</p>
+<p class="mensaje mensaje--error">El correo ya está registrado.</p>
+
+	4.	Tabla más legible en privado.php:
+
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th><th>Correo</th><th>Creado</th><th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php while ($fila = $consulta->fetch_assoc()): ?>
+      <tr>
+        <td><?= (int)$fila["id"] ?></td>
+        <td><?= htmlspecialchars($fila["nombre"]) ?></td>
+        <td><?= htmlspecialchars($fila["correo"]) ?></td>
+        <td><?= htmlspecialchars($fila["creado_en"]) ?></td>
+        <td class="filas-acciones">
+          <a href="editar.php?id=<?= (int)$fila['id'] ?>">Editar</a>
+          <a href="eliminar.php?id=<?= (int)$fila['id'] ?>" onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a>
+        </td>
+      </tr>
+    <?php endwhile; ?>
+  </tbody>
+</table>
+
+	5.	Navegación simple:
+
+<p class="nav">
+  <a href="registrar.php">Crear usuario</a>
+  <a href="privado.php">Inicio</a>
+  <a href="salir.php">Cerrar sesión</a>
+</p>
+<hr class="hr">
+
+
+⸻
+
+Parte B — Explicación didáctica de estilos
+	•	:root { --nombre: valor; }
+Declara variables CSS reutilizables: colores, sombra, etc.
+	•	box-sizing: border-box;
+Hace que width incluya padding y borde. Facilita medidas.
+	•	body{ font-family: system-ui, ... }
+Usa fuentes del sistema para buena legibilidad y rendimiento.
+	•	.contenedor { max-width:880px; margin:0 auto }
+Fija un ancho de lectura cómodo y centra el contenido.
+	•	.tarjeta { background:#fff; border-radius:14px; box-shadow:... }
+Crea un panel limpio con borde suave y sombra sutil.
+	•	.encabezado{ display:flex; gap:12px }
+Alinea título e iconos si los hubiera. gap define separación.
+	•	form{ display:grid; gap:14px } y .campo{ display:grid; gap:8px }
+Malla vertical simple para alinear etiquetas y campos.
+	•	input{ padding; border; border-radius }
+Campos más cómodos. Borde redondeado para lectura amable.
+	•	input:focus{ outline:3px solid var(--focus) }
+Accesibilidad. Resalta el campo activo para teclado/lectores.
+	•	.boton y .boton-sec
+Botón principal con color de marca y botón secundario neutro.
+	•	.mensaje, .mensaje--ok, .mensaje--error
+Cajas de aviso con color semántico para éxitos y errores.
+	•	.tabla { border-collapse:separate; border-spacing:0 }
+Permite bordes suaves y border-radius en el conjunto.
+	•	thead th{ background:#f0f4ff }
+Cabecera contrastada. Mejora escaneo visual.
+	•	.nav a{ color:var(--primario); font-weight:600 }
+Enlaces de navegación destacados sin recargar.
+
+⸻
+
+Checklist de aplicación
+	1.	Guarda estilo.css en la raíz del proyecto.
+	2.	Verifica que todas tus páginas tengan
+
+<link rel="stylesheet" href="estilo.css">
+
+
+	3.	Envuelve contenido en .contenedor > .tarjeta.
+	4.	Aplica clases campo, boton, tabla, nav, mensaje.
+	5.	Revisa en móvil. Ajusta padding si lo deseas.
