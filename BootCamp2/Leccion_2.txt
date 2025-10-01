@@ -80,7 +80,7 @@ Si ocurre un error al aplicar UTF-8, se detiene el programa y se muestra el mens
 	1.	Guarda el archivo como conexion.php dentro de proyecto_crud/.
 	2.	Abre en navegador:
 
-http://localhost/proyecto_crud/conexion.php
+	http://localhost/proyecto_crud/conexion.php
 
 
 	3.	Si no hay errores, la página queda en blanco (conexión correcta).
