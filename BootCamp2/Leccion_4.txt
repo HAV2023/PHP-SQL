@@ -1,4 +1,4 @@
-Lección 4 — Inicio de sesión (validación de credenciales + sesión)
+📘 Lección 4 — Inicio de sesión (validación de credenciales + sesión)
 
 Parte A — Código limpio (iniciar_sesion.php)
 
