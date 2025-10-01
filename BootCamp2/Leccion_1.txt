@@ -1,6 +1,6 @@
-Introducción
+👀 Introducción
 
-Objetivo
+🎯 Objetivo
 
 Construir un sitio web con:
 	•	Registro de usuarios.
