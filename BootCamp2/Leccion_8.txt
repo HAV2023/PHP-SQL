@@ -1,4 +1,4 @@
-Lección 8 — Estética y usabilidad (CSS limpio + pequeños ajustes en HTML)
+📘 Lección 8 — Estética y usabilidad (CSS limpio + pequeños ajustes en HTML)
 
 Parte A — Código limpio (estilo.css)
 
