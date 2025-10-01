@@ -120,6 +120,7 @@ Al final del Boot Camp, cada alumno podrá:
 	•	Mostrar solo los usuarios creados por la cuenta logueada.
 	•	Exportar datos a CSV desde phpMyAdmin.
 
- ⚠️ IMPORTANTE: Las lecciones deberán ser implementadas en sus proyectos, tanto para los que participan en prototipos como los que están en EasyProjects. Este requisito es indispensable para ser sumado al valor del examen del 2do. periodo.
+ ⚠️ IMPORTANTE: Las lecciones deberán ser implementadas en sus proyectos, tanto para los que participan en prototipos como los que están en EasyProjects. 
+Este requisito es indispensable para ser sumado al valor del examen del 2do. periodo.
 
 ⸻
