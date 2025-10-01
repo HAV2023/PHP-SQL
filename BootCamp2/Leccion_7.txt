@@ -1,4 +1,4 @@
-Lección 7 — Eliminar usuario (eliminar.php)
+📘 Lección 7 — Eliminar usuario (eliminar.php)
 
 ⸻
 
