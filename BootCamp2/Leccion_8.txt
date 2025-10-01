@@ -203,7 +203,7 @@ Enlaces de navegación destacados sin recargar.
 
 ⸻
 
-Checklist de aplicación
+🔍 Checklist de aplicación
 	1.	Guarda estilo.css en la raíz del proyecto.
 	2.	Verifica que todas tus páginas tengan
 
