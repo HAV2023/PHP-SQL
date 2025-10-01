@@ -1,1 +1,206 @@
+Lección 6 — Editar usuario (editar.php)
 
+Parte A — Código limpio
+
+<?php
+require_once "conexion.php";
+
+/* 1) Validar parámetro id */
+$id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
+if ($id <= 0) {
+    die("ID inválido.");
+}
+
+/* 2) Obtener datos actuales del usuario */
+$usuario = null;
+$sql_sel = "SELECT id, nombre, correo FROM usuarios WHERE id = ?";
+$sentencia_sel = $conexion->prepare($sql_sel);
+if (!$sentencia_sel) { die("Error al preparar la consulta: " . $conexion->error); }
+$sentencia_sel->bind_param("i", $id);
+$sentencia_sel->execute();
+$resultado_sel = $sentencia_sel->get_result();
+if ($resultado_sel && $resultado_sel->num_rows === 1) {
+    $usuario = $resultado_sel->fetch_assoc();
+} else {
+    die("Usuario no encontrado.");
+}
+$sentencia_sel->close();
+
+/* 3) Procesar envío de formulario (POST) */
+$mensaje = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre            = trim($_POST["nombre"] ?? "");
+    $correo            = trim($_POST["correo"] ?? "");
+    $contrasena_nueva  = $_POST["contrasena_nueva"] ?? ""; // opcional
+
+    if ($nombre === "" || $correo === "") {
+        $mensaje = "Nombre y correo son obligatorios.";
+    } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $mensaje = "El correo no es válido.";
+    } else {
+        if ($contrasena_nueva !== "") {
+            $contrasena_hash = password_hash($contrasena_nueva, PASSWORD_DEFAULT);
+            $sql_up = "UPDATE usuarios
+                       SET nombre = ?, correo = ?, contrasena_hash = ?
+                       WHERE id = ?";
+            $sentencia_up = $conexion->prepare($sql_up);
+            if (!$sentencia_up) {
+                $mensaje = "Error al preparar actualización: " . $conexion->error;
+            } else {
+                $sentencia_up->bind_param("sssi", $nombre, $correo, $contrasena_hash, $id);
+                if ($sentencia_up->execute()) {
+                    $mensaje = "Usuario actualizado (incluye nueva contraseña).";
+                    $usuario["nombre"] = $nombre;
+                    $usuario["correo"] = $correo;
+                } else {
+                    if ($conexion->errno === 1062) {
+                        $mensaje = "El correo ya está registrado en otro usuario.";
+                    } else {
+                        $mensaje = "Error al actualizar: " . $conexion->error;
+                    }
+                }
+                $sentencia_up->close();
+            }
+        } else {
+            $sql_up = "UPDATE usuarios
+                       SET nombre = ?, correo = ?
+                       WHERE id = ?";
+            $sentencia_up = $conexion->prepare($sql_up);
+            if (!$sentencia_up) {
+                $mensaje = "Error al preparar actualización: " . $conexion->error;
+            } else {
+                $sentencia_up->bind_param("ssi", $nombre, $correo, $id);
+                if ($sentencia_up->execute()) {
+                    $mensaje = "Usuario actualizado.";
+                    $usuario["nombre"] = $nombre;
+                    $usuario["correo"] = $correo;
+                } else {
+                    if ($conexion->errno === 1062) {
+                        $mensaje = "El correo ya está registrado en otro usuario.";
+                    } else {
+                        $mensaje = "Error al actualizar: " . $conexion->error;
+                    }
+                }
+                $sentencia_up->close();
+            }
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar usuario</title>
+  <link rel="stylesheet" href="estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Editar usuario</h1>
+
+  <?php if ($mensaje !== ""): ?>
+    <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+  <?php endif; ?>
+
+  <form method="post" action="editar.php?id=<?= (int)$usuario['id'] ?>" novalidate>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" required maxlength="100"
+           value="<?= htmlspecialchars($usuario['nombre']) ?>">
+
+    <label for="correo">Correo</label>
+    <input id="correo" name="correo" type="email" required maxlength="120"
+           value="<?= htmlspecialchars($usuario['correo']) ?>">
+
+    <label for="contrasena_nueva">Contraseña nueva (opcional)</label>
+    <input id="contrasena_nueva" name="contrasena_nueva" type="password" minlength="6"
+           placeholder="Déjalo vacío para no cambiarla">
+
+    <button type="submit">Guardar cambios</button>
+    <a href="privado.php">Volver</a>
+  </form>
+</body>
+</html>
+
+Parte B — Explicación línea por línea
+
+1) Encabezado y validación de id
+	•	require_once "conexion.php";
+Carga la conexión a MySQL y la sesión. Habilita $conexion y $_SESSION.
+	•	$id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
+Lee el parámetro id desde la URL. Convierte a entero. Si no viene, usa 0.
+	•	if ($id <= 0) { die("ID inválido."); }
+Rechaza identificadores nulos, negativos o no numéricos. die() detiene la ejecución y muestra el texto.
+
+2) Carga de datos del usuario
+	•	$sql_sel = "SELECT id, nombre, correo FROM usuarios WHERE id = ?";
+Consulta parametrizada para traer solo el usuario con ese id.
+	•	$sentencia_sel = $conexion->prepare($sql_sel);
+Prepara la consulta en el servidor. Devuelve un objeto de sentencia o false.
+	•	$sentencia_sel->bind_param("i", $id);
+Enlaza el parámetro id como entero ("i").
+	•	$sentencia_sel->execute();
+Ejecuta la sentencia preparada.
+	•	$resultado_sel = $sentencia_sel->get_result();
+Obtiene el conjunto de resultados.
+	•	if ($resultado_sel && $resultado_sel->num_rows === 1) { ... } else { die("Usuario no encontrado."); }
+Exige exactamente una fila hallada. Si no, detiene la ejecución.
+	•	$usuario = $resultado_sel->fetch_assoc();
+Convierte la fila en arreglo asociativo: claves id, nombre, correo.
+	•	$sentencia_sel->close();
+Libera recursos de la sentencia.
+
+3) Procesamiento del formulario (POST)
+	•	$mensaje = "";
+Variable de retroalimentación para el usuario.
+	•	if ($_SERVER["REQUEST_METHOD"] === "POST") { ... }
+Solo procesa cuando el formulario fue enviado por método POST.
+	•	$nombre = trim($_POST["nombre"] ?? "");
+Lee nombre y recorta espacios en blanco al inicio y al final.
+	•	$correo = trim($_POST["correo"] ?? "");
+Igual, para correo.
+	•	$contrasena_nueva = $_POST["contrasena_nueva"] ?? "";
+Lee la posible nueva contraseña. Puede venir vacía.
+	•	if ($nombre === "" || $correo === "")
+Valida campos obligatorios.
+	•	elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL))
+Verifica formato de correo con el filtro nativo.
+	•	Rama con cambio de contraseña
+	•	$contrasena_hash = password_hash($contrasena_nueva, PASSWORD_DEFAULT);
+Genera un hash seguro para la nueva contraseña.
+	•	UPDATE usuarios SET nombre=?, correo=?, contrasena_hash=? WHERE id=?
+Actualiza nombre, correo y contraseña.
+	•	bind_param("sssi", $nombre, $correo, $contrasena_hash, $id);
+Enlaza tres textos y un entero.
+	•	if ($sentencia_up->execute()) { ... } else { ... }
+Ejecuta y evalúa:
+Código 1062 → correo duplicado por índice UNIQUE.
+Otros errores → mensaje con $conexion->error.
+	•	Rama sin cambio de contraseña
+	•	UPDATE usuarios SET nombre=?, correo=? WHERE id=?
+Solo actualiza datos públicos.
+	•	bind_param("ssi", $nombre, $correo, $id);
+Enlaza dos textos y un entero.
+	•	Manejo de éxito y errores igual que la rama anterior.
+	•	Tras actualizar, se refrescan los valores en $usuario para que el formulario muestre lo último.
+
+4) Documento HTML y formulario
+	•	<!DOCTYPE html>, <html lang="es">, <meta charset="UTF-8">
+Declaran HTML5, idioma español y codificación UTF-8.
+	•	<link rel="stylesheet" href="estilo.css">
+Aplica estilos externos.
+	•	<?php if ($mensaje !== ""): ?> ... <?php endif; ?>
+Bloque condicional que imprime el mensaje si existe.
+	•	<form method="post" action="editar.php?id=<?= (int)$usuario['id'] ?>" novalidate>
+Envío por POST al mismo archivo. El id permanece en la URL. novalidate evita bloqueos de la validación nativa durante la práctica.
+	•	value="<?= htmlspecialchars($usuario['nombre']) ?>"
+Precarga el campo con el valor actual. htmlspecialchars evita inyección de HTML.
+	•	Campo Contraseña nueva (opcional)
+Si se deja vacío, no cambia la contraseña. Si se llena, se re-hashea y reemplaza.
+	•	Botón Guardar cambios y enlace Volver a privado.php.
+
+5) Pruebas mínimas
+	1.	En privado.php, clic en Editar de un usuario.
+	2.	Cambiar nombre y guardar. Debe mostrar “Usuario actualizado.”
+	3.	Cambiar correo a uno ya existente. Debe mostrar “El correo ya está registrado en otro usuario.”
+	4.	Cambiar contraseña llenando “Contraseña nueva”. Debe mostrar “Usuario actualizado (incluye nueva contraseña).”
+	5.	Probar con id inválido en la URL: editar.php?id=0 → “ID inválido.”
