@@ -198,7 +198,7 @@ Precarga el campo con el valor actual. htmlspecialchars evita inyección de HTML
 Si se deja vacío, no cambia la contraseña. Si se llena, se re-hashea y reemplaza.
 	•	Botón Guardar cambios y enlace Volver a privado.php.
 
-5) Pruebas mínimas
+🎯 Pruebas mínimas
 	1.	En privado.php, clic en Editar de un usuario.
 	2.	Cambiar nombre y guardar. Debe mostrar “Usuario actualizado.”
 	3.	Cambiar correo a uno ya existente. Debe mostrar “El correo ya está registrado en otro usuario.”
