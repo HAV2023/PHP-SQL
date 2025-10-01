@@ -1,4 +1,4 @@
-Lección 5 — Página privada y cierre de sesión
+📘 Lección 5 — Página privada y cierre de sesión
 
 Parte A — Código limpio (privado.php)
 
