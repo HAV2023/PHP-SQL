@@ -19,7 +19,7 @@ require __DIR__ . '/config.php';
 // - $_GET['id'] obtiene el valor pasado en la URL (ejemplo: delete.php?id=3).
 // - El operador de fusión nula (??) devuelve 0 si 'id' no está definido.
 // - (int) convierte el valor a entero para evitar inyección SQL por tipo.
-// ⚠️ Importante: se usa cast explícito a int, pero también se valida en PDO.
+// Importante: se usa cast explícito a int, pero también se valida en PDO.
 $id = (int)($_GET['id'] ?? 0);
 
 // --------------------------------------------------------------------------
