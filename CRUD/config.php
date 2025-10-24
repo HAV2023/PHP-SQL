@@ -3,6 +3,7 @@
 // Archivo: config.php
 // Propósito: Establecer conexión PDO segura y moderna a MySQL bajo entorno MAMP.
 // Contexto: usado en entornos de desarrollo locales macOS con MAMP (puerto 8889).
+// Modifiquen el puerto a 3306 si usan XAMPP o WAMP bajo Windows.
 // ==========================================================================
 
 // --------------------------------------------------------------------------
