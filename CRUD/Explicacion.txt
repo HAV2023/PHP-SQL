@@ -1,1 +1,167 @@
+🧩 Proyecto: CRUD de Alumnos con PHP y MySQL (PDO)
+
+🌐 Objetivo general
+
+Desarrollar un sistema básico CRUD (Create, Read, Update, Delete) que permita registrar, listar, editar y eliminar alumnos utilizando PHP, MySQL y HTML.
+El propósito es que el alumno comprenda **cómo se comunican las páginas PHP con la base de datos y cómo aplicar **buenas prácticas de seguridad y estructura.
+
+---
+
+🧱 1. Estructura del proyecto
+
+El proyecto está formado por los siguientes archivos principales:
+
+| Archivo       | Función principal                                                             |
+| ------------- | ----------------------------------------------------------------------------- |
+| `alumnos.sql` | Crea la base de datos y la tabla `alumnos`.                                   |
+| `config.php`  | Configura la conexión segura con MySQL mediante PDO.                          |
+| `index.php`   | Página principal. Permite registrar nuevos alumnos y mostrarlos en una tabla. |
+| `edit.php`    | Permite editar los datos (nombre y correo) de un alumno existente.            |
+| `delete.php`  | Elimina un alumno de la base de datos.                                        |
+
+---
+
+🧩 2. Base de datos: `alumnos.sql`
+
+Este archivo contiene las instrucciones para crear la tabla principal:
+
+```sql
+CREATE TABLE alumnos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(120) NOT NULL,
+  correo VARCHAR(160) NOT NULL UNIQUE,
+  creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+Explicación:
+
+`id`: identificador único que se incrementa automáticamente.
+`nombre`: nombre completo del alumno.
+`correo`: dirección de correo única.
+`creado_en`: guarda la fecha y hora en que se registró el alumno.
+
+---
+
+⚙️ 3. Conexión con la base de datos: `config.php`
+
+Este archivo se encarga de **establecer una conexión segura** entre PHP y MySQL usando **PDO (PHP Data Objects)**.
+
+```php
+$dsn = "mysql:host=127.0.0.1;port=8889;dbname=crud;charset=utf8mb4";
+$pdo = new PDO($dsn, 'root', 'root', $options);
+```
+
+Características principales:
+
+* Se usa el motor PDO, que es más seguro y flexible que `mysqli`.
+* Las consultas preparadas evitan ataques de inyección SQL.
+* Las opciones activan manejo de errores y formato asociativo para los resultados.
+
+💡 En producción, las credenciales deben almacenarse en un archivo `.env`, no directamente en el código.
+
+---
+
+🧠 4. Página principal: `index.php`
+
+Funciones principales:
+
+1. Insertar nuevos alumnos.
+2. Mostrar la lista de alumnos existentes.
+
+```php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $stmt = $pdo->prepare("INSERT INTO alumnos (nombre, correo) VALUES (?, ?)");
+  $stmt->execute([$_POST['nombre'], $_POST['correo']]);
+}
+```
+
+💡 Esta estructura garantiza que solo se ejecute la inserción cuando el usuario envía el formulario.
+
+Luego, la página muestra todos los registros en una tabla:
+
+```php
+$alumnos = $pdo->query("SELECT * FROM alumnos ORDER BY id DESC")->fetchAll();
+```
+
+En la parte inferior, cada fila tiene enlaces para editar o eliminar registros.
+
+---
+
+✏️ 5. Edición de registros: `edit.php`
+
+Permite modificar el nombre o el correo de un alumno específico.
+
+1. Se obtiene el `id` desde la URL (`edit.php?id=3`).
+2. Se consulta el registro correspondiente.
+3. Si el usuario envía el formulario, se ejecuta la actualización:
+
+```php
+$stmt = $pdo->prepare("UPDATE alumnos SET nombre=?, correo=? WHERE id=?");
+$stmt->execute([$_POST['nombre'], $_POST['correo'], $id]);
+```
+
+Medidas de seguridad:
+
+* Se usan consultas preparadas (`?`) para evitar inyección SQL.
+* Se emplea `htmlspecialchars()` para mostrar los valores sin riesgo de XSS.
+
+---
+
+🗑️ 6. Eliminación de registros: `delete.php`
+
+Este script borra el alumno seleccionado usando su `id`.
+
+```php
+$stmt = $pdo->prepare("DELETE FROM alumnos WHERE id=?");
+$stmt->execute([$id]);
+```
+
+Antes de eliminar, el usuario confirma la acción con una alerta JavaScript:
+
+```html
+<a href="delete.php?id=<?= $a['id'] ?>" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+```
+
+Nota: En aplicaciones reales, se recomienda implementar un “borrado lógico” (marcar como eliminado en lugar de borrar físicamente).
+
+---
+
+🧮 7. Resumen del flujo de datos
+
+1. index.php — Muestra y agrega alumnos.
+2. edit.php — Permite editar un alumno existente.
+3. delete.php — Elimina el registro seleccionado.
+4. config.php — Conecta todos los scripts con la base de datos.
+5. alumnos.sql — Define la estructura de datos.
+
+---
+
+🔐 8. Buenas prácticas aplicadas
+
+✅ Uso de consultas preparadas con PDO.
+✅ Sanitización de datos con `htmlspecialchars()`.
+✅ Separación de responsabilidades (cada archivo cumple una función).
+✅ Uso de `exit;` tras redirecciones para evitar ejecución adicional.
+✅ Codificación UTF-8 (`utf8mb4`) para soporte completo de caracteres.
+
+---
+
+💬 9. Actividad sugerida.
+
+1. Elaboren una nueva tabla llamada `profesores` con los campos `id`, `nombre`, `correo`, `materia`.
+2. Dupliquen los archivos PHP y adapten el código para manejar la nueva tabla.
+3. Agreguen un campo adicional (`teléfono`) y actualicen el CRUD completo.
+4. Implementen validaciones de formato en los formularios.
+5. Documenten el flujo en un diagrama (entrada, proceso, salida).
+
+---
+
+🎯 Conclusión
+
+Este proyecto enseña los fundamentos de la programación web dinámica con PHP y MySQL:
+cómo enviar datos desde formularios, cómo almacenarlos y cómo manipularlos desde el servidor.
+Además, refuerza conceptos esenciales como la seguridad, la validación y la organización modular del código.
+
+
 
