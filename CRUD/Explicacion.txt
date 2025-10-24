@@ -1,4 +1,4 @@
-🧩 Proyecto: CRUD de Alumnos con PHP y MySQL (PDO)
+Proyecto: CRUD de Alumnos con PHP y MySQL (PDO)
 
 🌐 Objetivo general
 
@@ -7,7 +7,7 @@ El propósito es que el alumno comprenda **cómo se comunican las páginas PHP c
 
 ---
 
-🧱 1. Estructura del proyecto
+1. Estructura del proyecto
 
 El proyecto está formado por los siguientes archivos principales:
 
@@ -21,7 +21,7 @@ El proyecto está formado por los siguientes archivos principales:
 
 ---
 
-🧩 2. Base de datos: `alumnos.sql`
+2. Base de datos: `alumnos.sql`
 
 Este archivo contiene las instrucciones para crear la tabla principal:
 
@@ -58,11 +58,11 @@ Características principales:
 * Las consultas preparadas evitan ataques de inyección SQL.
 * Las opciones activan manejo de errores y formato asociativo para los resultados.
 
-💡 En producción, las credenciales deben almacenarse en un archivo `.env`, no directamente en el código.
+En producción, las credenciales deben almacenarse en un archivo `.env`, no directamente en el código.
 
 ---
 
-🧠 4. Página principal: `index.php`
+4. Página principal: `index.php`
 
 Funciones principales:
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ```
 
-💡 Esta estructura garantiza que solo se ejecute la inserción cuando el usuario envía el formulario.
+Esta estructura garantiza que solo se ejecute la inserción cuando el usuario envía el formulario.
 
 Luego, la página muestra todos los registros en una tabla:
 
@@ -88,7 +88,7 @@ En la parte inferior, cada fila tiene enlaces para editar o eliminar registros.
 
 ---
 
-✏️ 5. Edición de registros: `edit.php`
+5. Edición de registros: `edit.php`
 
 Permite modificar el nombre o el correo de un alumno específico.
 
@@ -108,7 +108,7 @@ Medidas de seguridad:
 
 ---
 
-🗑️ 6. Eliminación de registros: `delete.php`
+6. Eliminación de registros: `delete.php`
 
 Este script borra el alumno seleccionado usando su `id`.
 
@@ -127,7 +127,7 @@ Nota: En aplicaciones reales, se recomienda implementar un “borrado lógico”
 
 ---
 
-🧮 7. Resumen del flujo de datos
+7. Resumen del flujo de datos
 
 1. index.php — Muestra y agrega alumnos.
 2. edit.php — Permite editar un alumno existente.
@@ -137,17 +137,17 @@ Nota: En aplicaciones reales, se recomienda implementar un “borrado lógico”
 
 ---
 
-🔐 8. Buenas prácticas aplicadas
+8. Buenas prácticas aplicadas
 
-✅ Uso de consultas preparadas con PDO.
-✅ Sanitización de datos con `htmlspecialchars()`.
-✅ Separación de responsabilidades (cada archivo cumple una función).
-✅ Uso de `exit;` tras redirecciones para evitar ejecución adicional.
-✅ Codificación UTF-8 (`utf8mb4`) para soporte completo de caracteres.
+* Uso de consultas preparadas con PDO.
+* Sanitización de datos con `htmlspecialchars()`.
+* Separación de responsabilidades (cada archivo cumple una función).
+* Uso de `exit;` tras redirecciones para evitar ejecución adicional.
+* Codificación UTF-8 (`utf8mb4`) para soporte completo de caracteres.
 
 ---
 
-💬 9. Actividad sugerida.
+9. Actividad sugerida.
 
 1. Elaboren una nueva tabla llamada `profesores` con los campos `id`, `nombre`, `correo`, `materia`.
 2. Dupliquen los archivos PHP y adapten el código para manejar la nueva tabla.
@@ -157,7 +157,7 @@ Nota: En aplicaciones reales, se recomienda implementar un “borrado lógico”
 
 ---
 
-🎯 Conclusión
+Conclusión
 
 Este proyecto enseña los fundamentos de la programación web dinámica con PHP y MySQL:
 cómo enviar datos desde formularios, cómo almacenarlos y cómo manipularlos desde el servidor.
