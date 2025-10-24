@@ -1,6 +1,6 @@
 Proyecto: CRUD de Alumnos con PHP y MySQL (PDO)
 
-Objetivo general
+Objetivo general.
 
 Desarrollar un sistema básico CRUD (Create, Read, Update, Delete) que permita registrar, listar, editar y eliminar alumnos utilizando PHP, MySQL y HTML.
 El propósito es que el alumno comprenda cómo se comunican las páginas PHP con la base de datos y cómo aplicar buenas prácticas de seguridad y estructura.
