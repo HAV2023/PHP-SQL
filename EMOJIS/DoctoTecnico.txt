@@ -1,1 +1,85 @@
+🧩 1. Estados y operaciones**
+
+| Uso                   | Emoji   | Ejemplo                                       |
+| --------------------- | ------- | --------------------------------------------- |
+| Correcto / Exitoso    | ✅ ✔️ 🟢 | `// ✅ Operación completada`                   |
+| Error / Falla         | ❌ ⚠️ 🟥 | `// ❌ Error al conectar con la base de datos` |
+| En proceso / Cargando | ⏳ 🔄 🕐 | `// 🔄 Procesando solicitud`                  |
+| Finalizado            | 🏁 ✅    | `// 🏁 Script finalizado`                     |
+| Detenido / Cancelado  | ⛔ 🛑    | `// 🛑 Proceso detenido por el usuario`       |
+
+---
+
+🧠 2. Documentación y explicación**
+
+| Uso                 | Emoji | Ejemplo                                            |
+| ------------------- | ----- | -------------------------------------------------- |
+| Nota importante     | 📝 📘 | `// 📝 Esta función se usa en el módulo principal` |
+| Ejemplo             | 💡 📚 | `// 💡 Ejemplo: calcularPromedio([3,4,5])`         |
+| Recomendación / Tip | 💡 🤖 | `// 💡 Usa 'const' en lugar de 'var'`              |
+| Advertencia         | ⚠️ 🚧 | `// ⚠️ No modificar este bloque sin autorización`  |
+| Depuración / Debug  | 🐛 🔍 | `// 🐛 Debug mode activado`                        |
+
+---
+
+🧰 3. Estructura y módulos**
+
+| Uso              | Emoji  | Ejemplo                          |
+| ---------------- | ------ | -------------------------------- |
+| Archivo o módulo | 📁 📄  | `// 📁 Módulo: auth.js`          |
+| Función          | 🧮 ⚙️  | `// ⚙️ Función: calcularTotal()` |
+| Variables        | 🔢 🧠  | `// 🔢 Variables globales`       |
+| API o red        | 🌐 🔌  | `// 🌐 Endpoint de conexión`     |
+| Base de datos    | 🗃️ 💾 | `// 💾 Insert en tabla usuarios` |
+
+---
+
+🚀 4. Rendimiento y desarrollo**
+
+| Uso             | Emoji | Ejemplo                                 |
+| --------------- | ----- | --------------------------------------- |
+| Optimización    | ⚡ 🔧  | `// ⚡ Código optimizado para velocidad` |
+| Mejora          | 🔼 🆙 | `// 🔼 Mejora de eficiencia`            |
+| Nuevo           | 🆕 ✨  | `// ✨ Nueva función añadida`            |
+| Eliminado       | 🗑️ ❎ | `// 🗑️ Código obsoleto eliminado`      |
+| Refactorización | 🔁 ♻️ | `// ♻️ Refactorización del módulo`      |
+
+---
+
+🧑‍💻 5. Control de versiones / Git**
+
+| Uso               | Emoji | Ejemplo                                      |
+| ----------------- | ----- | -------------------------------------------- |
+| Commit inicial    | 🎉    | `git commit -m "🎉 Initial commit"`          |
+| Nueva función     | ✨     | `git commit -m "✨ Add login module"`         |
+| Corrección de bug | 🐛    | `git commit -m "🐛 Fix email validation"`    |
+| Documentación     | 📝    | `git commit -m "📝 Update README"`           |
+| Refactorización   | ♻️    | `git commit -m "♻️ Refactor code structure"` |
+| Eliminación       | 🔥    | `git commit -m "🔥 Remove legacy files"`     |
+| Desempeño         | ⚡     | `git commit -m "⚡ Improve loop performance"` |
+| Dependencias      | 📦    | `git commit -m "📦 Update dependencies"`     |
+
+---
+
+🎨 6. Presentaciones o interfaces**
+
+| Uso                | Emoji     | Ejemplo                                           |
+| ------------------ | --------- | ------------------------------------------------- |
+| Botón / acción     | 🔘 ▶️ 🖱️ | “Haz clic en ▶️ *Ejecutar*”                       |
+| Tema visual        | 🎨 🖌️    | “Actualiza el color de fondo 🎨”                  |
+| Resultado visual   | 📊 📈     | “El gráfico 📊 muestra la tendencia”              |
+| Usuario            | 👤 👥     | “Autenticación de 👤 usuario”                     |
+| Sistema / Servidor | 🖥️ 🧠    | “Conexión establecida con 🖥️ servidor principal” |
+
+---
+
+🧭 7. Proyectos educativos y motivacionales**
+
+| Uso               | Emoji  | Ejemplo                                      |
+| ----------------- | ------ | -------------------------------------------- |
+| Ejercicio         | 🧩 🧠  | “🧩 Ejercicio 3: estructuras condicionales”  |
+| Proyecto          | 🏗️ 💻 | “💻 Proyecto final – Sistema de inventarios” |
+| Evaluación        | 🧾 🧮  | “🧾 Autoevaluación del código”               |
+| Logro             | 🏅 🏆  | “🏅 Proyecto completado sin errores”         |
+| Trabajo en equipo | 🤝 👥  | “🤝 Colabora con tu compañero de equipo”     |
 
