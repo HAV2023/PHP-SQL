@@ -1,0 +1,219 @@
+/* ==========================================================
+   UNIVERSAL NAVIGATOR CODE (UNC v1.6)
+   Paridad total y centrado perfecto en Safari/Edge/Chrome/Firefox
+   Autor: Hector Arciniega
+   ========================================================== */
+
+/* Reset básico */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;              /* Safari-safe centering context */
+  justify-content: center;
+}
+
+/* Contenedor maestro */
+.uc-wrapper {
+  width: 100%;
+  max-width: 960px;
+  padding: 48px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;         /* todo centrado en el mismo eje */
+}
+
+/* Tarjeta (form + títulos de secciones) */
+.uc-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  text-align: center;
+  padding: 24px 28px;
+  margin-bottom: 30px;
+}
+
+.uc-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.uc-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 8px 0 14px;
+  text-align: center;
+}
+
+/* Mensajes */
+.msg {
+  max-width: 420px;
+  margin: 10px auto 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  line-height: 1.3;
+  font-size: 14px;
+}
+.msg.ok    { background:#e6f9ec; color:#166534; border:1px solid #34d399; }
+.msg.error { background:#fef2f2; color:#991b1b; border:1px solid #fca5a5; }
+
+/* Formulario */
+.uc-form { width: 100%; }
+.uc-form input[type="text"],
+.uc-form input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color .2s, box-shadow .2s;
+  display: block;              /* fuerza a estar en columna */
+}
+.uc-form input[type="text"]:focus,
+.uc-form input[type="email"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* Link bajo la tarjeta */
+.actions { margin-top: 8px; }
+.uc-link {
+  color:#1d4ed8; text-decoration:none; font-weight:600;
+}
+.uc-link:hover { text-decoration: underline; }
+
+/* Botón principal UNC */
+.uc-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: all .25s ease;
+  box-shadow: 0 3px 10px rgba(37,99,235,.25);
+  border: none;
+  cursor: pointer;
+}
+.uc-btn:hover { background:#1d4ed8; transform: translateY(-1px); box-shadow: 0 5px 14px rgba(37,99,235,.3); }
+.uc-btn--full { width: 100%; }
+
+/* Tabla */
+.uc-tablebox { width:100%; display:flex; flex-direction:column; align-items:center; }
+table {
+  width: 100%;
+  max-width: 850px;
+  border-collapse: collapse;
+  background:#fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  margin-top: 6px;
+}
+thead { background:#f1f5f9; }
+th, td { padding: 12px; text-align:center; border-bottom: 1px solid #e2e8f0; font-size:14px; }
+th { font-weight:700; color:#0f172a; }
+tr:hover td { background:#f8fafc; }
+
+/* Botones de acción en tabla */
+.btn-edit, .btn-delete {
+  display:inline-block; padding:6px 10px; border-radius:6px; color:#fff;
+  font-weight:600; text-decoration:none; margin:0 3px; transition:background-color .2s ease;
+}
+.btn-edit   { background:#2563eb; }
+.btn-edit:hover { background:#1e40af; }
+.btn-delete { background:#dc2626; }
+.btn-delete:hover { background:#991b1b; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .uc-wrapper { padding: 32px 12px 60px; }
+  .uc-card { max-width: 90%; }
+  th, td { font-size:13px; padding:10px 6px; }
+}
+
+/* Safari alignment assurance (sin hacks visuales) */
+@supports (-webkit-appearance: none) {
+  html, body { display:flex; justify-content:center; }
+  .uc-wrapper { align-items:center; }
+  .uc-title, .uc-subtitle { text-align:center !important; margin-left:auto; margin-right:auto; }
+}
+
+/* Separación extra bajo la tabla (UNC v1.6.1 refinement) */
+.uc-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;   /* ← antes 0 o muy poco */
+  margin-bottom: 40px; /* ← espaciado visual que equilibra en Safari */
+}
+
+/* ==========================================================
+   UNC v1.6.2 – Refinement for Edit Form
+   ========================================================== */
+
+/* Labels y inputs en columna centrada */
+.uc-form label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin: 6px 0 4px 2px;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.uc-card form input[type="text"],
+.uc-card form input[type="email"] {
+  width: 100%;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.uc-card form input[type="text"]:focus,
+.uc-card form input[type="email"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  outline: none;
+}
+
+/* Botón secundario (volver) */
+.uc-btn--secondary {
+  background: #475569;
+  color: #fff;
+  padding: 10px 22px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color .25s ease;
+  box-shadow: 0 3px 10px rgba(71,85,105,0.25);
+}
+
+.uc-btn--secondary:hover {
+  background: #334155;
+}
+
+/* Espaciado adicional bajo tarjeta */
+.uc-actions {
+  margin-top: 24px;
+  margin-bottom: 48px; /* ← espacio para equilibrio visual */
+}
