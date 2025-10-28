@@ -1,53 +1,136 @@
 /* ==========================================================
-   UNIVERSAL NAVIGATOR CODE (UNC v1.6)
-   Paridad total y centrado perfecto en Safari/Edge/Chrome/Firefox
-   Autor: Hector Arciniega
+   UNIVERSAL NAVIGATOR CODE (UNC v1.6.2)
+   Archivo: styles.css
+   Autor: Héctor Arciniega
+   Propósito: Dar una apariencia profesional, limpia y centrada
+   a las páginas del sistema CRUD, funcionando idéntico en Safari,
+   Chrome, Edge y Firefox.
    ========================================================== */
 
-/* Reset básico */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+/* ----------------------------------------------------------
+   RESET BÁSICO
+   Limpia el estilo por defecto de los navegadores para que
+   todos comiencen desde un mismo punto visual.
+---------------------------------------------------------- */
+
+/* El asterisco selecciona todos los elementos del documento. */
+*,
+*::before,
+*::after {
+  /* Hace que el padding y el borde se incluyan dentro del tamaño total del elemento. */
+  box-sizing: border-box;
+
+  /* Elimina el margen predeterminado de todos los elementos. */
+  margin: 0;
+
+  /* Elimina el relleno interno predeterminado. */
+  padding: 0;
+}
+
+
+/* ----------------------------------------------------------
+   ESTRUCTURA GENERAL DEL DOCUMENTO
+   Aquí definimos el aspecto general del cuerpo de la página.
+---------------------------------------------------------- */
+
+html,
+body {
+  /* Ocupar todo el alto y ancho de la pantalla. */
   height: 100%;
   width: 100%;
+
+  /* Tipografía moderna, clara y fácil de leer. */
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Fondo gris claro que resalta los cuadros blancos. */
   background-color: #f5f7fa;
+
+  /* Color base del texto, gris oscuro. */
   color: #1e293b;
+
+  /* Suaviza el texto en pantallas con tecnología WebKit (Safari, Chrome). */
   -webkit-font-smoothing: antialiased;
+
+  /* Suaviza el texto en macOS con Firefox. */
   -moz-osx-font-smoothing: grayscale;
-  display: flex;              /* Safari-safe centering context */
+
+  /* Convierte el contenedor principal en un elemento flexible. */
+  display: flex;
+
+  /* Centra horizontalmente el contenido principal. */
   justify-content: center;
 }
 
-/* Contenedor maestro */
+
+/* ----------------------------------------------------------
+   CONTENEDOR PRINCIPAL (.uc-wrapper)
+   Este bloque encierra todo el contenido del sistema.
+---------------------------------------------------------- */
+
 .uc-wrapper {
+  /* Ancho completo, pero con un máximo definido. */
   width: 100%;
   max-width: 960px;
+
+  /* Espaciado interno: arriba, lados y abajo. */
   padding: 48px 20px 100px;
+
+  /* Coloca los elementos uno debajo de otro. */
   display: flex;
   flex-direction: column;
-  align-items: center;         /* todo centrado en el mismo eje */
+
+  /* Centra todos los elementos dentro del contenedor. */
+  align-items: center;
 }
 
-/* Tarjeta (form + títulos de secciones) */
+
+/* ----------------------------------------------------------
+   TARJETA PRINCIPAL (.uc-card)
+   Se usa para encuadrar formularios o secciones.
+---------------------------------------------------------- */
+
 .uc-card {
+  /* Ocupa todo el ancho disponible dentro del contenedor. */
   width: 100%;
+
+  /* Límite máximo para no extenderse demasiado. */
   max-width: 420px;
+
+  /* Fondo blanco para destacar sobre el gris del fondo. */
   background: #fff;
+
+  /* Bordes redondeados. */
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+  /* Sombra suave que da sensación de profundidad. */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+  /* Centra el texto dentro de la tarjeta. */
   text-align: center;
+
+  /* Espaciado interior uniforme. */
   padding: 24px 28px;
+
+  /* Separación inferior entre tarjetas. */
   margin-bottom: 30px;
 }
 
+
+/* ----------------------------------------------------------
+   TÍTULOS
+   Ajustes visuales de los encabezados.
+---------------------------------------------------------- */
+
+/* Título principal (por ejemplo “Registro de Alumnos”). */
 .uc-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 1.8rem;  /* Tamaño grande. */
+  font-weight: 700;   /* Texto grueso. */
+  color: #0f172a;     /* Azul oscuro casi negro. */
   margin-bottom: 14px;
 }
 
+/* Subtítulos (por ejemplo “Registros actuales”). */
 .uc-subtitle {
   font-size: 1.1rem;
   font-weight: 700;
@@ -56,119 +139,268 @@ html, body {
   text-align: center;
 }
 
-/* Mensajes */
+
+/* ----------------------------------------------------------
+   MENSAJES DE ÉXITO Y ERROR (.msg)
+   Se muestran después de registrar o si hay un problema.
+---------------------------------------------------------- */
+
 .msg {
-  max-width: 420px;
-  margin: 10px auto 16px;
-  padding: 10px 12px;
-  border-radius: 8px;
+  max-width: 420px;        /* No más ancho que la tarjeta. */
+  margin: 10px auto 16px;  /* Espaciado superior e inferior. */
+  padding: 10px 12px;      /* Espaciado interno. */
+  border-radius: 8px;      /* Bordes suaves. */
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.3;        /* Espaciado entre líneas. */
   font-size: 14px;
 }
-.msg.ok    { background:#e6f9ec; color:#166534; border:1px solid #34d399; }
-.msg.error { background:#fef2f2; color:#991b1b; border:1px solid #fca5a5; }
 
-/* Formulario */
-.uc-form { width: 100%; }
+/* Mensaje verde: operación exitosa. */
+.msg.ok {
+  background: #e6f9ec;        /* Verde muy claro. */
+  color: #166534;             /* Verde oscuro para texto. */
+  border: 1px solid #34d399;  /* Borde verde medio. */
+}
+
+/* Mensaje rojo: error o advertencia. */
+.msg.error {
+  background: #fef2f2;        /* Rojo muy claro. */
+  color: #991b1b;             /* Rojo oscuro. */
+  border: 1px solid #fca5a5;  /* Borde rojo medio. */
+}
+
+
+/* ----------------------------------------------------------
+   FORMULARIO PRINCIPAL (.uc-form)
+---------------------------------------------------------- */
+
+.uc-form {
+  width: 100%; /* El formulario ocupa todo el ancho de su contenedor. */
+}
+
+/* Campos de texto y correo dentro del formulario. */
 .uc-form input[type="text"],
 .uc-form input[type="email"] {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 15px;
-  transition: border-color .2s, box-shadow .2s;
-  display: block;              /* fuerza a estar en columna */
+  width: 100%;               /* Cada campo ocupa el 100% del ancho. */
+  padding: 10px 12px;        /* Espaciado interno del texto. */
+  margin-bottom: 12px;       /* Separación entre campos. */
+  border: 1px solid #cbd5e1; /* Borde gris claro. */
+  border-radius: 6px;        /* Bordes redondeados. */
+  font-size: 15px;           /* Tamaño del texto. */
+  transition: border-color 0.2s, box-shadow 0.2s; /* Animación suave al enfocar. */
+  display: block;
 }
+
+/* Efecto visual cuando el usuario hace clic o escribe. */
 .uc-form input[type="text"]:focus,
 .uc-form input[type="email"]:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  outline: none;                             /* Quita el borde azul predeterminado. */
+  border-color: #2563eb;                     /* Borde azul brillante. */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15); /* Brillo azul alrededor del campo. */
 }
 
-/* Link bajo la tarjeta */
-.actions { margin-top: 8px; }
+
+/* ----------------------------------------------------------
+   ENLACE BAJO EL FORMULARIO (.uc-link)
+   Por ejemplo, “Ver lista combinada (JOIN)”.
+---------------------------------------------------------- */
+
+.actions {
+  margin-top: 8px; /* Pequeña separación respecto al botón. */
+}
+
 .uc-link {
-  color:#1d4ed8; text-decoration:none; font-weight:600;
+  color: #1d4ed8;         /* Azul vivo. */
+  text-decoration: none;  /* Quita el subrayado. */
+  font-weight: 600;       /* Texto un poco más grueso. */
 }
-.uc-link:hover { text-decoration: underline; }
 
-/* Botón principal UNC */
+.uc-link:hover {
+  text-decoration: underline; /* Subraya al pasar el mouse. */
+}
+
+
+/* ----------------------------------------------------------
+   BOTÓN PRINCIPAL (.uc-btn)
+---------------------------------------------------------- */
+
 .uc-btn {
-  display: inline-block;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  color: #fff;
+  display: inline-block; /* Se comporta como botón independiente. */
+  background: linear-gradient(90deg, #2563eb, #1d4ed8); /* Degradado azul horizontal. */
+  color: #fff;            /* Texto blanco. */
   font-weight: 600;
-  text-decoration: none;
-  padding: 10px 22px;
-  border-radius: 6px;
-  transition: all .25s ease;
-  box-shadow: 0 3px 10px rgba(37,99,235,.25);
-  border: none;
-  cursor: pointer;
+  padding: 10px 22px;     /* Tamaño cómodo para clics. */
+  border-radius: 6px;     /* Bordes suaves. */
+  transition: all 0.25s ease; /* Transición suave en color y sombra. */
+  box-shadow: 0 3px 10px rgba(37, 99, 235, .25); /* Sombra azul. */
+  border: none;           /* Sin borde visible. */
+  cursor: pointer;        /* Cursor tipo “mano”. */
 }
-.uc-btn:hover { background:#1d4ed8; transform: translateY(-1px); box-shadow: 0 5px 14px rgba(37,99,235,.3); }
-.uc-btn--full { width: 100%; }
 
-/* Tabla */
-.uc-tablebox { width:100%; display:flex; flex-direction:column; align-items:center; }
+/* Efecto al pasar el mouse sobre el botón. */
+.uc-btn:hover {
+  background: #1d4ed8;               /* Azul más oscuro. */
+  transform: translateY(-1px);       /* Pequeño levantamiento visual. */
+  box-shadow: 0 5px 14px rgba(37, 99, 235, .3); /* Sombra más fuerte. */
+}
+
+/* Versión que ocupa todo el ancho (botón Registrar). */
+.uc-btn--full {
+  width: 100%;
+}
+
+
+/* ----------------------------------------------------------
+   TABLA DE REGISTROS (.uc-tablebox)
+---------------------------------------------------------- */
+
+.uc-tablebox {
+  width: 100%;
+  display: flex;              /* Contenedor flexible. */
+  flex-direction: column;     /* Organiza verticalmente. */
+  align-items: center;        /* Centra los elementos. */
+}
+
+/* Tabla general donde se muestran los registros. */
 table {
   width: 100%;
   max-width: 850px;
-  border-collapse: collapse;
-  background:#fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  border-collapse: collapse;  /* Quita los espacios entre celdas. */
+  background: #fff;
+  border-radius: 12px;        /* Bordes redondeados en toda la tabla. */
+  overflow: hidden;           /* Oculta bordes que sobresalen. */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06); /* Sombra leve. */
   margin-top: 6px;
 }
-thead { background:#f1f5f9; }
-th, td { padding: 12px; text-align:center; border-bottom: 1px solid #e2e8f0; font-size:14px; }
-th { font-weight:700; color:#0f172a; }
-tr:hover td { background:#f8fafc; }
 
-/* Botones de acción en tabla */
-.btn-edit, .btn-delete {
-  display:inline-block; padding:6px 10px; border-radius:6px; color:#fff;
-  font-weight:600; text-decoration:none; margin:0 3px; transition:background-color .2s ease;
+/* Encabezado de la tabla (fila superior). */
+thead {
+  background: #f1f5f9; /* Fondo gris claro. */
 }
-.btn-edit   { background:#2563eb; }
-.btn-edit:hover { background:#1e40af; }
-.btn-delete { background:#dc2626; }
-.btn-delete:hover { background:#991b1b; }
 
-/* Responsive */
+/* Celdas (encabezado y datos). */
+th,
+td {
+  padding: 12px;                    /* Espacio interno. */
+  text-align: center;               /* Centra el contenido. */
+  border-bottom: 1px solid #e2e8f0; /* Línea gris divisoria. */
+  font-size: 14px;
+}
+
+/* Estilo del texto del encabezado. */
+th {
+  font-weight: 700; /* Negrita. */
+  color: #0f172a;
+}
+
+/* Efecto al pasar el mouse por encima de las filas. */
+tr:hover td {
+  background: #f8fafc; /* Fondo gris muy suave. */
+}
+
+
+/* ----------------------------------------------------------
+   BOTONES DE ACCIÓN (Editar y Borrar)
+---------------------------------------------------------- */
+
+.btn-edit,
+.btn-delete {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 3px;
+  transition: background-color 0.2s ease;
+}
+
+/* Botón azul para Editar. */
+.btn-edit {
+  background: #2563eb;
+}
+
+.btn-edit:hover {
+  background: #1e40af; /* Azul más oscuro al pasar el mouse. */
+}
+
+/* Botón rojo para Borrar. */
+.btn-delete {
+  background: #dc2626;
+}
+
+.btn-delete:hover {
+  background: #991b1b; /* Rojo más oscuro al pasar el mouse. */
+}
+
+
+/* ----------------------------------------------------------
+   VERSIÓN RESPONSIVE
+   Se activa cuando la pantalla es menor a 768 píxeles (móvil/tablet).
+---------------------------------------------------------- */
+
 @media (max-width: 768px) {
-  .uc-wrapper { padding: 32px 12px 60px; }
-  .uc-card { max-width: 90%; }
-  th, td { font-size:13px; padding:10px 6px; }
+  .uc-wrapper {
+    padding: 32px 12px 60px; /* Reduce márgenes. */
+  }
+
+  .uc-card {
+    max-width: 90%; /* Ajusta la tarjeta al tamaño del teléfono. */
+  }
+
+  th,
+  td {
+    font-size: 13px; /* Texto más pequeño para caber mejor. */
+    padding: 10px 6px;
+  }
 }
 
-/* Safari alignment assurance (sin hacks visuales) */
+
+/* ----------------------------------------------------------
+   AJUSTES ESPECIALES PARA SAFARI
+   Safari interpreta “flex” de forma distinta; esto lo corrige.
+---------------------------------------------------------- */
+
 @supports (-webkit-appearance: none) {
-  html, body { display:flex; justify-content:center; }
-  .uc-wrapper { align-items:center; }
-  .uc-title, .uc-subtitle { text-align:center !important; margin-left:auto; margin-right:auto; }
+  html,
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  .uc-wrapper {
+    align-items: center;
+  }
+
+  .uc-title,
+  .uc-subtitle {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-/* Separación extra bajo la tabla (UNC v1.6.1 refinement) */
+
+/* ----------------------------------------------------------
+   ESPACIADO EXTRA BAJO LA TABLA (.uc-actions)
+   Evita que el botón final quede demasiado pegado al borde.
+---------------------------------------------------------- */
+
 .uc-actions {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 28px;   /* ← antes 0 o muy poco */
-  margin-bottom: 40px; /* ← espaciado visual que equilibra en Safari */
+  margin-top: 28px;
+  margin-bottom: 40px;
 }
 
-/* ==========================================================
-   UNC v1.6.2 – Refinement for Edit Form
-   ========================================================== */
 
-/* Labels y inputs en columna centrada */
+/* ----------------------------------------------------------
+   AJUSTES ADICIONALES PARA FORMULARIOS DE EDICIÓN
+---------------------------------------------------------- */
+
+/* Etiquetas (labels) de los campos. */
 .uc-form label {
   display: block;
   text-align: left;
@@ -178,6 +410,7 @@ tr:hover td { background:#f8fafc; }
   font-size: 14px;
 }
 
+/* Campos dentro de las tarjetas de edición. */
 .uc-card form input[type="text"],
 .uc-card form input[type="email"] {
   width: 100%;
@@ -186,34 +419,43 @@ tr:hover td { background:#f8fafc; }
   border-radius: 6px;
   padding: 10px 12px;
   font-size: 15px;
-  transition: border-color .2s, box-shadow .2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+/* Efecto al enfocarse en los campos de edición. */
 .uc-card form input[type="text"]:focus,
 .uc-card form input[type="email"]:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
   outline: none;
 }
 
-/* Botón secundario (volver) */
+
+/* ----------------------------------------------------------
+   BOTÓN SECUNDARIO (Volver / Cancelar)
+---------------------------------------------------------- */
+
 .uc-btn--secondary {
-  background: #475569;
+  background: #475569; /* Gris azulado. */
   color: #fff;
   padding: 10px 22px;
   font-weight: 600;
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color .25s ease;
-  box-shadow: 0 3px 10px rgba(71,85,105,0.25);
+  transition: background-color 0.25s ease;
+  box-shadow: 0 3px 10px rgba(71, 85, 105, 0.25);
 }
 
 .uc-btn--secondary:hover {
-  background: #334155;
+  background: #334155; /* Más oscuro al pasar el mouse. */
 }
 
-/* Espaciado adicional bajo tarjeta */
+
+/* ----------------------------------------------------------
+   ESPACIADO FINAL PARA ARMONÍA VISUAL
+---------------------------------------------------------- */
+
 .uc-actions {
   margin-top: 24px;
-  margin-bottom: 48px; /* ← espacio para equilibrio visual */
+  margin-bottom: 48px; /* Espacio inferior para equilibrio visual. */
 }
