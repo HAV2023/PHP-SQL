@@ -1,4 +1,21 @@
 <?php
+/**
+ * index.php - Página de inicio / Punto de entrada principal
+ *
+ * Página principal del sitio. Puede ser un landing page público o
+ * redirigir al dashboard si el usuario ya está autenticado.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Página principal
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 $page_title = "Código Activo - Programación Bachillerato";
 require_once 'includes/header.php';
 ?>
