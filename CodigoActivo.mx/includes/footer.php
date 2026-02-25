@@ -1,3 +1,23 @@
+<?php
+/**
+ * footer.php - Plantilla de pie de página común del sitio
+ *
+ * Cierra el contenedor principal, muestra el footer con copyright y nota
+ * de uso restringido, incluye el script de Bootstrap JS y cierra las
+ * etiquetas <body> y <html>. Se incluye al final de todas las páginas.
+ *
+ * @author    Hector @Gebirgsjager73
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Plantillas / Layout
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);  // Opcional aquí: puedes quitar esta línea si prefieres
+?>
+
 </div> <!-- cierre del container principal -->
 
 <footer class="bg-dark text-white text-center py-4 mt-5">
