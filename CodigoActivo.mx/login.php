@@ -1,4 +1,21 @@
 <?php
+/**
+ * login.php - Formulario e inicio de sesión de usuarios
+ *
+ * Muestra el formulario de login y procesa las credenciales.
+ * Verifica usuario/contraseña, inicia sesión y redirige según rol/estado.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Autenticación
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 $page_title = "Iniciar Sesión";
 require_once 'includes/header.php';
 
