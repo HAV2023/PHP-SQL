@@ -1,4 +1,22 @@
 <?php
+/**
+ * test-db.php - Script de prueba de conexión a la base de datos
+ *
+ * Archivo auxiliar para verificar que la conexión PDO funciona correctamente,
+ * probar consultas básicas y detectar errores de configuración de DB.
+ * Solo para desarrollo / depuración (NO usar en producción).
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Desarrollo / Pruebas
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 require_once 'includes/config.php';
 
 header('Content-Type: text/html; charset=utf-8');
