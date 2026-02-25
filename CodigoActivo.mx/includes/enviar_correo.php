@@ -36,7 +36,7 @@ function enviarCorreoActivacion($destinatario, $nombre, $token) {
         $mail->Host       = 'smtp.mx';              // Tu servidor confirmado
         $mail->SMTPAuth   = true;                         // Requiere auth
         $mail->Username   = 'no-reply@codigoactivo.mx';   // Usuario completo
-        $mail->Password   = '';       // Tu contraseña
+        $mail->Password   = 'meter_contraseña';       // Tu contraseña
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // TLS (STARTTLS)
         $mail->Port       = 587;                          // Puerto recomendado
 
