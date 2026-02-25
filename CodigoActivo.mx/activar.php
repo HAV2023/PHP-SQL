@@ -1,4 +1,23 @@
 <?php
+
+/**
+ * activar.php - Procesador de enlace de activación de cuenta
+ *
+ * Recibe un token por GET, valida su existencia, vigencia (48 horas)
+ * y que la cuenta no esté ya verificada. Si es válido, activa la cuenta
+ * y limpia el token. Muestra mensaje de éxito o error.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Autenticación
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 $page_title = "Activar Cuenta";
 require_once 'includes/header.php';
 
