@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->Host       = 'smtp.ionos.mx';
                         $mail->SMTPAuth   = true;
                         $mail->Username   = 'no-reply@codigoactivo.mx';
-                        $mail->Password   = 'foRwur-divmum-4jomxa';  // ¡Cambia esto a config seguro en producción!
+                        $mail->Password   = '';  // ¡Cambia esto a config seguro en producción!
                         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                         $mail->Port       = 587;
                         $mail->CharSet    = 'UTF-8';
