@@ -6,7 +6,7 @@
  * de uso restringido, incluye el script de Bootstrap JS y cierra las
  * etiquetas <body> y <html>. Se incluye al final de todas las páginas.
  *
- * @author    Hector @Gebirgsjager73
+ * @author    Hector Arciniega
  * @copyright 2026 Hector - Código Activo
  * @license   MIT
  * @version   1.0.0
