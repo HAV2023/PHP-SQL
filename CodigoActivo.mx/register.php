@@ -1,4 +1,21 @@
 <?php
+/**
+ * register.php - Formulario y lógica de registro de nuevos usuarios
+ *
+ * Muestra el formulario de registro, valida datos, crea el usuario
+ * en la base de datos, genera token de verificación y envía email.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Autenticación
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 $page_title = "Registro de Usuario";
 require_once 'includes/header.php';
 
