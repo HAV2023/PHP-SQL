@@ -1,4 +1,23 @@
 <?php
+/**
+ * enviar_correo.php - Función o script para enviar correos electrónicos
+ *
+ * Maneja el envío de emails (por ejemplo, verificación de cuenta, recuperación
+ * de contraseña, notificaciones). Usa mail() nativo o PHPMailer si está implementado.
+ * Se incluye o requiere desde register.php, activar.php u otros.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Email / Notificaciones
+ * @since     Febrero 2026
+ * @uses      mail() o librería PHPMailer
+ */
+
+declare(strict_types=1);
+
 // includes/enviar_correo.php
 
 use PHPMailer\PHPMailer\PHPMailer;
