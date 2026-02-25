@@ -1,4 +1,22 @@
 <?php
+/**
+ * config.php - Archivo de configuración global del proyecto
+ *
+ * Define constantes importantes (rutas, credenciales de DB, claves secretas,
+ * configuración de email, entorno de desarrollo/producción, etc.).
+ * Se incluye al inicio de casi todos los archivos PHP del sistema.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Configuración
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 // config.php - Configuración de la base de datos para codigoactivo.mx
 
 // === CONFIGURACIÓN DE LA BASE DE DATOS ===
