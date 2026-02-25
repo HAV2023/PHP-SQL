@@ -1,4 +1,21 @@
 <?php
+/**
+ * dashboard.php - Panel principal del usuario autenticado
+ *
+ * Muestra el dashboard personalizado del usuario después de iniciar sesión.
+ * Incluye información del perfil, estadísticas, accesos rápidos, etc.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Interfaz de usuario
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 $page_title = "Dashboard";
 require_once 'includes/header.php';
 
