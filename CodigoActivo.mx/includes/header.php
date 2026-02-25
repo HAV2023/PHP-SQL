@@ -1,4 +1,22 @@
 <?php
+/**
+ * header.php - Plantilla de cabecera común (includes/header.php)
+ *
+ * Inicia el documento HTML, define <head> con meta tags, título dinámico,
+ * enlaces a CSS, Bootstrap, Font Awesome, etc. Puede incluir navbar.
+ * Se incluye al inicio de todas las páginas.
+ *
+ * @author    Hector Arciniega
+ * @copyright 2026 Hector - Código Activo
+ * @license   MIT
+ * @version   1.0.0
+ * @package   CodigoActivo
+ * @category  Plantillas / Layout
+ * @since     Febrero 2026
+ */
+
+declare(strict_types=1);
+
 require_once 'includes/config.php';
 
 // Iniciar sesión si no está activa
