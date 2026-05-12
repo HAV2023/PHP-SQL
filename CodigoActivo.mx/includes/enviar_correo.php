@@ -31,7 +31,7 @@ function enviarCorreoActivacion($destinatario, $nombre, $token) {
     $mail = new PHPMailer(true);
 
     try {
-        // Configuración del servidor SMTP (IONOS México)
+        // Configuración del servidor SMTP
         $mail->isSMTP();
         $mail->Host       = 'smtp.mx';              // Tu servidor confirmado
         $mail->SMTPAuth   = true;                         // Requiere auth
